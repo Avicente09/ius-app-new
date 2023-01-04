@@ -23,7 +23,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "typescript": "tsc --project tsconfig.json --noEmit",
+    "lint-staged": "lint-staged --config lint-staged.js",
+    "husky-install": "husky install"
   },
   "browserslist": {
     "production": [
@@ -39,6 +42,9 @@
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.6.0",
-    "prettier": "2.8.1"
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
+    "prettier": "2.8.1",
+    "tsc-files": "^1.1.3"
   }
 }
