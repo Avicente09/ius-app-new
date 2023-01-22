@@ -1,8 +1,14 @@
 import { Box } from '@mui/material';
 
-const Content = () => {
+type Props = {
+    children: JSX.Element;
+}
+
+const Content = ({children} : Props) => {
     return(
-        <Box bgcolor="lightskyblue" flex={4} p={2}>Content</Box>
+        <Box flex={4} p={2}>
+            {children}
+        </Box>
     )
 }
 
