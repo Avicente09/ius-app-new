@@ -1,22 +1,22 @@
-import { Header } from './components/layout/header';
-import { Footer } from './components/layout/footer';
-import { Navbar } from './components/layout/navbar';
-import { Content } from './components/layout/content';
-import { Login } from './components/login';
-import { Box, Stack } from '@mui/material';
+
+import { Routes, Route } from 'react-router-dom';
+import { Login } from './pages';
+import Box from '@mui/material/Box';
+import { Home }  from './pages';
+import { AuthProvider } from './context/authContext';
 
 function App() {
   return (
-    <Box>
-      <Header></Header>
-      <Stack direction="row" justifyContent="space-between">
-        <Navbar></Navbar>
-        <Content>
-          <Login />
-        </Content>
-      </Stack>
-      <Footer></Footer>
-    </Box>
+    <AuthProvider value={null}>
+      <Box>
+        <Routes>
+          <Route path="/home" element={<Home />}/>
+          <Route path="/login" element={<Login />}/>
+        </Routes>
+      </Box>
+      
+    </AuthProvider>
+    
   );
 }
 

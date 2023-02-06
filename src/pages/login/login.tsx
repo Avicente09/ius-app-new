@@ -1,5 +1,5 @@
-
-
+import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel'; 
@@ -9,15 +9,32 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container'; 
 import Typography from '@mui/material/Typography';
 import DeliveryDiningTwoToneIcon from '@mui/icons-material/DeliveryDiningTwoTone';
-const Login = () => {
+import { useAuth } from '../../hooks';
+
+export const Login = () => {
+    const { login, logout, user, isLoading } = useAuth(); 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user && !isLoading) {
+            navigate("/home");
+        }
+      }, [user, isLoading, navigate]);
+
     const handleNoticeClick = () => {
         //Logic to show privacy text modal
     }
     const handleFBLogin = () => {
         //Logic to call FB login service
+        login({
+            id: '1',
+            name: 'Shirmigod Raw',
+            email: 'shirmigod@gmail.com',
+          });
     }
     const handleGoogleLogin = () => {
         //Logic to call Google login service
+        logout();
     }
     return(      
         <Container component="main" maxWidth="xs">
@@ -66,5 +83,3 @@ const Login = () => {
         </Container>
     )
 }
-
-export default Login;

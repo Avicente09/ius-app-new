@@ -8,7 +8,7 @@ const StyledBox = styled(Box)({
   paddingBottom: "1rem",
 })
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <StyledBox>
       <Container maxWidth="lg">
@@ -28,5 +28,3 @@ const Footer = () => {
     </StyledBox>
   );
 };
-
-export default Footer;

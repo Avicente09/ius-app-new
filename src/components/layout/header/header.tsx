@@ -7,7 +7,7 @@ const StyledToolbar = styled(Toolbar)({
   justifyContent: "space-between",
 })
 
-const Header = () => {
+export const Header = () => {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -48,4 +48,3 @@ const Header = () => {
     </AppBar>
   );
 }
-export default Header;
