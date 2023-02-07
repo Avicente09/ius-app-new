@@ -9,7 +9,10 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container'; 
 import Typography from '@mui/material/Typography';
 import DeliveryDiningTwoToneIcon from '@mui/icons-material/DeliveryDiningTwoTone';
+import FacebookLogin, { ProfileSuccessResponse } from '@greatsumini/react-facebook-login'; 
 import { useAuth } from '../../hooks';
+
+const fbAppId : string = process.env.REACT_APP_FB_ID || '';
 
 export const Login = () => {
     const { login, logout, user, isLoading } = useAuth(); 
@@ -24,18 +27,15 @@ export const Login = () => {
     const handleNoticeClick = () => {
         //Logic to show privacy text modal
     }
-    const handleFBLogin = () => {
-        //Logic to call FB login service
+    const handleFBLogin = (response : ProfileSuccessResponse) => {
         login({
-            id: '1',
-            name: 'Shirmigod Raw',
-            email: 'shirmigod@gmail.com',
+            id: response.id,
+            name: response.name,
+            email: response.email
           });
     }
-    const handleGoogleLogin = () => {
-        //Logic to call Google login service
-        logout();
-    }
+    const handleGoogleLogin = () => logout();
+
     return(      
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -52,15 +52,21 @@ export const Login = () => {
                     <Typography variant="h4">Bienvenido a iUS</Typography>
                 </Box>
                 <Box component="form" noValidate>
-                    <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                    onClick={handleFBLogin}
-                    >
-                    Iniciar Sesión con Facebook
-                    </Button>
+                    <FacebookLogin
+                    appId={fbAppId}
+                    onProfileSuccess={ (response) => handleFBLogin(response)}
+                    render={({ onClick, logout }) => (
+                        <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                        onClick={handleFBLogin}
+                        >
+                        Iniciar Sesión con Facebook
+                        </Button>
+                      )}
+                    />
                     <Button
                     type="submit"
                     fullWidth
@@ -75,8 +81,8 @@ export const Login = () => {
                     </Box>
                     <Box justifyContent="center" mt="20px">                   
                         <Link onClick={handleNoticeClick} variant="button">
-                                Aviso Importante
-                            </Link>
+                            Aviso Importante
+                        </Link>
                     </Box>
                 </Box>
             </Box>

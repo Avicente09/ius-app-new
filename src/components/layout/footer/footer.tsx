@@ -1,4 +1,8 @@
-import { Box, Container, Grid, styled, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import styled from "@mui/material/styles/styled";
+import Typography from "@mui/material/Typography";
 
 const StyledBox = styled(Box)({
   width: "100%",

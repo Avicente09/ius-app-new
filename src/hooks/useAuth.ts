@@ -26,6 +26,7 @@ export const useAuth = () => {
   const logout = () => {
     context?.setUser(null);
     setUser(null);
+    localStorage.removeItem('user');
   };
 
   return { user, login, logout, isLoading };
