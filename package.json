@@ -27,7 +27,7 @@
     "test": "jest",
     "eject": "react-scripts eject",
     "typescript": "tsc --project tsconfig.json --noEmit",
-    "lint-staged": "lint-staged --config lint-staged.js",
+    "lint-staged": "lint-staged --config lint-staged.config.js",
     "prepare": "husky install"
   },
   "browserslist": {
