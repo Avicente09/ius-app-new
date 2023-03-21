@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,10 +16,29 @@ import FacebookLogin, {
 import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
 import jwt from 'jwt-decode';
 import { useAuth } from '../../hooks';
+import { InfoModal, ModalType } from '../../components/info-modal';
+import { LoginState, LoginAction } from './login.types';
 
 const fbAppId: string = process.env.REACT_APP_FB_ID || '';
+const loginReducer = (state: LoginState, action: Partial<LoginAction>) : LoginState => {
+  switch(action.type){
+    case 'modalToggle':
+      return { ...state, ...action } as LoginState;
+    default:
+      return { ...state } as LoginState
+  }
+}
+
+const initialState : LoginState = {
+  toggleModal: false,
+  modalTitle: '',
+  modalMsg: '',
+  modalType: ModalType.Info
+}
 
 export const Login = () => {
+  const [state, dispatch] = useReducer(loginReducer, initialState);
+  const handleCloseModal = () => dispatch({type: 'modalToggle', toggleModal: false});
   const { login, user, isLoading } = useAuth();
   const navigate = useNavigate();
 
@@ -31,6 +50,7 @@ export const Login = () => {
 
   const handleNoticeClick = () => {
     //Logic to show privacy text modal
+    dispatch({type: 'modalToggle', toggleModal: true, modalTitle: 'Aviso Importante para los Usuarios', modalMsg: 'Lorem pisupasdsfi asdfpaosdifu dfsfñalsdj pdsifasdf pasdfoiasdfpou', modalType: ModalType.Info});
   };
   const handleFBLogin = (response: ProfileSuccessResponse) => {
     login({
@@ -50,7 +70,7 @@ export const Login = () => {
         email: decodedToken.email,
       });
     } else {
-        // TODO: Show msg that something went wrong on a modal component
+      dispatch({type: 'modalToggle', toggleModal: true, modalTitle: 'Lo sentimos, algo salió mal', modalMsg: 'Por favor intenta más tarde, estamos trabajando para solucionar el problema', modalType: ModalType.Error });
     }
   };
 
@@ -108,6 +128,13 @@ export const Login = () => {
           </Box>
         </Box>
       </Box>
+        <InfoModal
+        onClose={handleCloseModal}
+        open={state.toggleModal}
+        title={state.modalTitle}
+        type={state.modalType}
+        message={state.modalMsg}
+      />
     </Container>
   );
 };
