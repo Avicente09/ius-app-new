@@ -7,6 +7,7 @@ import { Content } from '../components';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { useAuth } from '../hooks';
+import { RestaurantForm } from './restaurant-form/restaurant-form';
 
 export const Home = () => {
   const { user, isLoading } = useAuth();
@@ -24,7 +25,7 @@ export const Home = () => {
       <Stack direction="row" justifyContent="space-between">
         <Navbar></Navbar>
         <Content>
-          <div>Content</div>
+          <RestaurantForm />
         </Content>
       </Stack>
       <Footer></Footer>
