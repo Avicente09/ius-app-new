@@ -1,13 +1,16 @@
-import { Controller, FieldValues } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
-import { FormInputProps } from './form-input-text.types';
+import type { FieldValues } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
+
+import type { FormInputTextProps } from './form-input-text.types';
 
 export const FormInputText = ({
   name,
   label,
   fControl,
   validations,
-}: FormInputProps<FieldValues>) => {
+  placeholder,
+}: FormInputTextProps<FieldValues>) => {
   return (
     <Controller
       name={name}
@@ -19,6 +22,7 @@ export const FormInputText = ({
           label={label}
           error={!!error}
           helperText={error ? validations?.customErrorMsg : ''}
+          placeholder={placeholder}
         />
       )}
     />

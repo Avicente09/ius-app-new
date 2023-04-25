@@ -1,10 +1,11 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { Login } from './pages';
 import Box from '@mui/material/Box';
-import { Home } from './pages';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import { AuthProvider } from './context/authContext';
+import { Login } from './pages';
+import { Home } from './pages';
 
 const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 

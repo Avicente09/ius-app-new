@@ -1,7 +1,9 @@
-import { FieldValues, useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import type { FieldValues } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+
 import { FormInputText } from '../../components';
 
 const defaultValues: FieldValues = {

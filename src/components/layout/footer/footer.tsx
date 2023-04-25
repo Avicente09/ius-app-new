@@ -1,16 +1,16 @@
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import styled from "@mui/material/styles/styled";
-import Typography from "@mui/material/Typography";
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import styled from '@mui/system/styled';
 
 const StyledBox = styled(Box)({
-  width: "100%",
-  height: "auto",
-  backgroundColor: "mediumpurple",
-  paddingTop: "1rem",
-  paddingBottom: "1rem",
-})
+  width: '100%',
+  height: 'auto',
+  backgroundColor: 'mediumpurple',
+  paddingTop: '1rem',
+  paddingBottom: '1rem',
+});
 
 export const Footer = () => {
   return (

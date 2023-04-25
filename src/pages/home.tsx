@@ -1,11 +1,12 @@
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { Header } from '../components';
 import { Footer } from '../components';
 import { Navbar } from '../components';
 import { Content } from '../components';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import { useAuth } from '../hooks';
 import { RestaurantForm } from './restaurant-form/restaurant-form';
 

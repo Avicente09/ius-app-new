@@ -1,17 +1,18 @@
-import type { ReactNode } from 'react';
-import Typography from '@mui/material/Typography';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import DangerousIcon from '@mui/icons-material/Dangerous';
+import FeedIcon from '@mui/icons-material/Feed';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
 import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
+import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogActions from '@mui/material/DialogActions';
-import FeedIcon from '@mui/icons-material/Feed';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import DangerousIcon from '@mui/icons-material/Dangerous';
+import DialogTitle from '@mui/material/DialogTitle';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import type { ReactNode } from 'react';
+
 import { type ModalProps, ModalType } from './info-modal.types';
 
 const headerStyle = {
@@ -20,37 +21,6 @@ const headerStyle = {
   justifyContent: 'center',
   width: '100%',
   height: 100,
-};
-
-export const InfoModal = ({
-  type,
-  title,
-  message,
-  open,
-  onClose,
-}: ModalProps) => {
-  return (
-    <Dialog
-      open={open!}
-      onClose={onClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-      fullWidth
-    >
-      {modalHeader(type)}
-      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          {message}
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} autoFocus>
-          Cerrar
-        </Button>
-      </DialogActions>
-    </Dialog>
-  );
 };
 
 const modalHeader = (modalType: ModalType): ReactNode => {
@@ -103,5 +73,36 @@ const modalHeader = (modalType: ModalType): ReactNode => {
         </Grid>
       </Grid>
     </Box>
+  );
+};
+
+export const InfoModal = ({
+  type,
+  title,
+  message,
+  open,
+  onClose,
+}: ModalProps) => {
+  return (
+    <Dialog
+      open={open!}
+      onClose={onClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+      fullWidth
+    >
+      {modalHeader(type)}
+      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-description">
+          {message}
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} autoFocus>
+          Cerrar
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };

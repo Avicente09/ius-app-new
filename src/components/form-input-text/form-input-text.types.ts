@@ -1,12 +1,15 @@
-import { Control, FieldValues } from 'react-hook-form';
+import type { Control, FieldValues } from 'react-hook-form';
 
-export interface FormInputProps<T extends FieldValues> {
+export interface FormInputTextValidations {
+  required: boolean;
+  pattern?: string;
+  customErrorMsg?: string;
+}
+
+export interface FormInputTextProps<T extends FieldValues> {
   name: string;
   label: string;
   fControl: Control<T>;
-  validations?: {
-    required: boolean;
-    pattern?: string;
-    customErrorMsg?: string;
-  };
+  validations?: FormInputTextValidations;
+  placeholder?: string;
 }

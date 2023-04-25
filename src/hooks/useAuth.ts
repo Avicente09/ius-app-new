@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+import type { IUser } from '../business/models';
 import { useAuthContext } from '../context/authContext';
-import { IUser } from '../business/models';
 
 export const useAuth = () => {
   const context = useAuthContext();
   const [user, setUser] = useState(context?.user ?? null);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   useEffect(() => {
     const userItem = localStorage.getItem('user');
     const user = userItem ? (JSON.parse(userItem) as IUser) : null;

@@ -1,44 +1,49 @@
-import { useEffect, useReducer } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import type { ProfileSuccessResponse } from '@greatsumini/react-facebook-login';
+import FacebookLogin from '@greatsumini/react-facebook-login';
 import DeliveryDiningTwoToneIcon from '@mui/icons-material/DeliveryDiningTwoTone';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import FacebookLogin, {
-  ProfileSuccessResponse,
-} from '@greatsumini/react-facebook-login';
-import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+import type { CredentialResponse } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 import jwt from 'jwt-decode';
-import { useAuth } from '../../hooks';
+import { useEffect, useReducer } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { InfoModal, ModalType } from '../../components/info-modal';
-import { LoginState, LoginAction } from './login.types';
+import { useAuth } from '../../hooks';
+import type { LoginAction, LoginState } from './login.types';
 
 const fbAppId: string = process.env.REACT_APP_FB_ID || '';
-const loginReducer = (state: LoginState, action: Partial<LoginAction>) : LoginState => {
-  switch(action.type){
+const loginReducer = (
+  state: LoginState,
+  action: Partial<LoginAction>
+): LoginState => {
+  switch (action.type) {
     case 'modalToggle':
       return { ...state, ...action } as LoginState;
     default:
-      return { ...state } as LoginState
+      return { ...state } as LoginState;
   }
-}
+};
 
-const initialState : LoginState = {
+const initialState: LoginState = {
   toggleModal: false,
   modalTitle: '',
   modalMsg: '',
-  modalType: ModalType.Info
-}
+  modalType: ModalType.Info,
+};
 
 export const Login = () => {
   const [state, dispatch] = useReducer(loginReducer, initialState);
-  const handleCloseModal = () => dispatch({type: 'modalToggle', toggleModal: false});
+  const handleCloseModal = () =>
+    dispatch({ type: 'modalToggle', toggleModal: false });
   const { login, user, isLoading } = useAuth();
   const navigate = useNavigate();
 
@@ -50,7 +55,14 @@ export const Login = () => {
 
   const handleNoticeClick = () => {
     //Logic to show privacy text modal
-    dispatch({type: 'modalToggle', toggleModal: true, modalTitle: 'Aviso Importante para los Usuarios', modalMsg: 'Lorem pisupasdsfi asdfpaosdifu dfsfñalsdj pdsifasdf pasdfoiasdfpou', modalType: ModalType.Info});
+    dispatch({
+      type: 'modalToggle',
+      toggleModal: true,
+      modalTitle: 'Aviso Importante para los Usuarios',
+      modalMsg:
+        'Lorem pisupasdsfi asdfpaosdifu dfsfñalsdj pdsifasdf pasdfoiasdfpou',
+      modalType: ModalType.Info,
+    });
   };
   const handleFBLogin = (response: ProfileSuccessResponse) => {
     login({
@@ -70,7 +82,14 @@ export const Login = () => {
         email: decodedToken.email,
       });
     } else {
-      dispatch({type: 'modalToggle', toggleModal: true, modalTitle: 'Lo sentimos, algo salió mal', modalMsg: 'Por favor intenta más tarde, estamos trabajando para solucionar el problema', modalType: ModalType.Error });
+      dispatch({
+        type: 'modalToggle',
+        toggleModal: true,
+        modalTitle: 'Lo sentimos, algo salió mal',
+        modalMsg:
+          'Por favor intenta más tarde, estamos trabajando para solucionar el problema',
+        modalType: ModalType.Error,
+      });
     }
   };
 
@@ -128,7 +147,7 @@ export const Login = () => {
           </Box>
         </Box>
       </Box>
-        <InfoModal
+      <InfoModal
         onClose={handleCloseModal}
         open={state.toggleModal}
         title={state.modalTitle}

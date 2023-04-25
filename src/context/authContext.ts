@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
-import { IUser } from '../business/models';
+
+import type { IUser } from '../business/models';
 
 interface IAuthContext {
   user: IUser | null;
