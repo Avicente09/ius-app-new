@@ -1,28 +1,53 @@
-import Box from '@mui/material/Box';
+import ThemeProvider from '@mui/system/ThemeProvider';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { AuthProvider } from './context/authContext';
-import { Login } from './pages';
-import { Home } from './pages';
+import { iUSTheme } from './theming';
 
 const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
+
+const routes = [
+  {
+    index: false,
+    path: '/home',
+    page: lazy(() => import('./pages/home')),
+  },
+  {
+    path: 'login',
+    page: lazy(() => import('./pages/login')),
+  },
+];
+
+function Loading() {
+  return <h1>Loading...</h1>;
+}
 
 function App() {
   return (
     <GoogleOAuthProvider clientId={googleClientId}>
       <React.StrictMode>
-        <BrowserRouter>
-          <AuthProvider value={null}>
-            <Box>
+        <ThemeProvider theme={iUSTheme}>
+          <BrowserRouter>
+            <AuthProvider value={null}>
               <Routes>
-                <Route path="/home" element={<Home />} />
-                <Route path="/login" element={<Login />} />
+                {routes.map(({ index, path, page: Page }) => (
+                  <Route
+                    key={`route-${path ?? 'index'}`}
+                    index={index}
+                    path={path}
+                    element={
+                      <Suspense fallback={<Loading />}>
+                        <Page />
+                      </Suspense>
+                    }
+                  />
+                ))}
               </Routes>
-            </Box>
-          </AuthProvider>
-        </BrowserRouter>
+            </AuthProvider>
+          </BrowserRouter>
+        </ThemeProvider>
       </React.StrictMode>
     </GoogleOAuthProvider>
   );

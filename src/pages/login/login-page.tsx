@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { InfoModal, ModalType } from '../../components/info-modal';
 import { useAuth } from '../../hooks';
-import type { LoginAction, LoginState } from './login.types';
+import type { LoginAction, LoginState } from './login-page.types';
 
 const fbAppId: string = process.env.REACT_APP_FB_ID || '';
 const loginReducer = (
@@ -40,7 +40,7 @@ const initialState: LoginState = {
   modalType: ModalType.Info,
 };
 
-export const Login = () => {
+export const LoginPage = () => {
   const [state, dispatch] = useReducer(loginReducer, initialState);
   const handleCloseModal = () =>
     dispatch({ type: 'modalToggle', toggleModal: false });

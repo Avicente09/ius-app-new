@@ -1,9 +1,12 @@
+import ThemeProvider from '@mui/system/ThemeProvider';
 import type { RenderOptions } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+
+import { iUSTheme } from '../src/theming';
 
 export type CustomRenderOptions = Omit<RenderOptions, 'queries'>;
 
@@ -15,7 +18,11 @@ function setup(jsx: React.ReactElement | JSX.Element) {
 }
 
 export function AllTheProviders({ children }: PropsWithChildren) {
-  return <BrowserRouter>{children}</BrowserRouter>;
+  return (
+    <ThemeProvider theme={iUSTheme}>
+      <BrowserRouter>{children}</BrowserRouter>
+    </ThemeProvider>
+  );
 }
 const customRender = (
   ui: React.ReactElement | JSX.Element,
