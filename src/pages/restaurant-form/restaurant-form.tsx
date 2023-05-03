@@ -4,11 +4,12 @@ import Typography from '@mui/material/Typography';
 import type { FieldValues } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
-import { FormInputText } from '../../components';
+import { FormInputText, FormInputType } from '../../components';
 
 const defaultValues: FieldValues = {
   firstName: '',
-  lastName: '',
+  phone: '',
+  money: '',
 };
 export const RestaurantForm = () => {
   const { handleSubmit, control } = useForm({ defaultValues });
@@ -27,7 +28,18 @@ export const RestaurantForm = () => {
           customErrorMsg: 'El campo nombre es requerido',
         }}
       />
-      <FormInputText name="lastName" fControl={control} label="Apellido" />
+      <FormInputText
+        name="phone"
+        type={FormInputType.Phone}
+        fControl={control}
+        label="Phone"
+      />
+      <FormInputText
+        name="money"
+        type={FormInputType.Currency}
+        fControl={control}
+        label="Salary"
+      />
 
       <Button onClick={handleSubmit(onSubmit)} variant={'contained'}>
         Submit
