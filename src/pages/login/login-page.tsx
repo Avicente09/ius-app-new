@@ -10,14 +10,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import { InfoModal, ModalType } from '@presentation/components/organisms';
+import { useAuth } from '@presentation/hooks';
 import type { CredentialResponse } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import jwt from 'jwt-decode';
 import { useEffect, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { InfoModal, ModalType } from '../../components/info-modal';
-import { useAuth } from '../../hooks';
 import type { LoginAction, LoginState } from './login-page.types';
 
 const fbAppId: string = process.env.REACT_APP_FB_ID || '';

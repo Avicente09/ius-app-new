@@ -1,9 +1,8 @@
+import { MainMenu } from '@presentation/components/organisms';
+import { NarrowStack } from '@presentation/components/templates';
+import { useAuth } from '@presentation/hooks';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { MainMenu } from '../../components/organisms';
-import { NarrowStack } from '../../components/templates';
-import { useAuth } from '../../hooks';
 
 export function HomePage(): JSX.Element {
   const { user, isLoading } = useAuth();

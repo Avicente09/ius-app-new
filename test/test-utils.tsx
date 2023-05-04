@@ -6,7 +6,7 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { iUSTheme } from '../src/theming';
+import { iUSTheme } from '../src/presentation/theming';
 
 export type CustomRenderOptions = Omit<RenderOptions, 'queries'>;
 

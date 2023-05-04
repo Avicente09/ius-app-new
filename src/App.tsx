@@ -1,10 +1,9 @@
 import ThemeProvider from '@mui/system/ThemeProvider';
+import { AuthProvider } from '@presentation/context';
+import { iUSTheme } from '@presentation/theming';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-import { AuthProvider } from './context/authContext';
-import { iUSTheme } from './theming';
 
 const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
 

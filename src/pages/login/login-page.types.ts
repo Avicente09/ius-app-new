@@ -1,4 +1,4 @@
-import type { ModalType } from '../../components/info-modal';
+import type { ModalType } from '@presentation/components/organisms';
 
 export type LoginState = {
   toggleModal: boolean;

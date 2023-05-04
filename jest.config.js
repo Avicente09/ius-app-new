@@ -14,6 +14,14 @@ module.exports = {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
     '^.+\\.(js|jsx)$': 'babel-jest',
   },
+  moduleNameMapper: {
+    '@config/(.*)': '<rootDir>/src/config/$1',
+    '@domain/(.*)': '<rootDir>/src/domain/$1',
+    '@implementation/(.*)': '<rootDir>/src/implementation/$1',
+    '@pages/(.*)': '<rootDir>/src/pages/$1',
+    '@presentation/(.*)': '<rootDir>/src/presentation/$1',
+    '@utils/(.*)': '<rootDir>/src/utils/$1',
+  },
   coveragePathIgnorePatterns: ['mocks', 'test', 'index.ts'],
   coverageReporters: ['clover', 'json', 'lcov', 'text'],
   coverageThreshold: {
