@@ -8,7 +8,15 @@ export function MainMenuOptionButton({
   onClick,
 }: MainMenuOptionButtonProps): JSX.Element {
   return (
-    <Button onClick={onClick}>
+    <Button
+      onClick={onClick}
+      sx={theme => ({
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText,
+        padding: theme.spacing(3, 9),
+        borderRadius: theme.borderRadius.large,
+      })}
+    >
       <Typography variant="h3">{text}</Typography>
     </Button>
   );

@@ -28,7 +28,7 @@ const StyledMainContainer = styled(Box)(
   flex-direction: column;
 
   > button {
-    margin-bottom: ${theme.spacing(2)};
+    margin-bottom: ${theme.spacing(5)};
     
     :last-of-type {
       margin-bottom: 0;

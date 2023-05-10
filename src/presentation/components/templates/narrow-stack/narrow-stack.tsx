@@ -12,7 +12,6 @@ export function NarrowStack({
       sx={{
         display: 'flex',
         width: '100%',
-        height: '100%',
       }}
     >
       <Box
@@ -22,8 +21,17 @@ export function NarrowStack({
           mr: 'auto',
         }}
       >
-        <Box m={theme => theme.spacing(3, 0)}>
-          <Typography variant="h1">{title}</Typography>
+        <Box
+          sx={theme => ({
+            m: theme.spacing(9, 0),
+            display: 'flex',
+            justifyContent: 'center',
+            alignContent: 'center',
+          })}
+        >
+          <Typography variant="h2" fontWeight="bold">
+            {title}
+          </Typography>
         </Box>
         {children}
       </Box>
