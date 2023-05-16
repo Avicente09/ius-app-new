@@ -1,33 +1,11 @@
-import type { FilledInputProps } from '@mui/material/FilledInput';
-import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
 import type { FieldValues } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
-import { IMaskInput } from 'react-imask';
+import { NumericFormat, PatternFormat } from 'react-number-format';
 
-import type { CustomProps, FormInputTextProps } from './form-input-text.types';
+import type { FormInputTextProps } from './form-input-text.types';
 import { FormInputType } from './form-input-text.types';
-
-const TextMaskCustom = React.forwardRef<HTMLElement, CustomProps>(
-  function TextMaskCustom(props, ref) {
-    const { onChange, ...other } = props;
-    return (
-      <IMaskInput
-        {...other}
-        mask="(#00) 000-0000"
-        definitions={{
-          '#': /[1-9]/,
-        }}
-        inputRef={ref}
-        onAccept={(value: any) =>
-          onChange({ target: { name: props.name, value } })
-        }
-        overwrite
-      />
-    );
-  }
-);
 
 export const FormInputText = ({
   name,
@@ -37,47 +15,122 @@ export const FormInputText = ({
   validations,
   placeholder,
 }: FormInputTextProps<FieldValues>) => {
-  let inputParams: FilledInputProps;
-  let elementType: React.HTMLInputTypeAttribute = 'text';
+  let typedComponent: React.ReactNode;
+
+  //Functions to render every component according to its type
+  const phoneInput = (): React.ReactNode => {
+    return (
+      <Controller
+        name={name}
+        control={fControl}
+        rules={{ required: validations?.required }}
+        render={({ field, fieldState: { error } }) => (
+          <PatternFormat
+            format="(502) ####-####"
+            mask="_"
+            value={field.value}
+            name={field.name}
+            onChange={field.onChange}
+            customInput={TextField}
+            label={label}
+            error={!!error}
+            helperText={error ? validations?.customErrorMsg : ''}
+            placeholder={placeholder}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        )}
+      />
+    );
+  };
+  const currencyInput = (): React.ReactNode => {
+    return (
+      <Controller
+        name={name}
+        control={fControl}
+        rules={{ required: validations?.required }}
+        render={({ field, fieldState: { error } }) => (
+          <NumericFormat
+            customInput={TextField}
+            value={field.value}
+            name={field.name}
+            onChange={field.onChange}
+            prefix="Q"
+            decimalScale={2}
+            label={label}
+            error={!!error}
+            helperText={error ? validations?.customErrorMsg : ''}
+            placeholder={placeholder}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        )}
+      />
+    );
+  };
+  const numericInput = (): React.ReactNode => {
+    return (
+      <Controller
+        name={name}
+        control={fControl}
+        rules={{ required: validations?.required }}
+        render={({ field, fieldState: { error } }) => (
+          <TextField
+            {...field}
+            label={label}
+            type="number"
+            variant="filled"
+            error={!!error}
+            helperText={error ? validations?.customErrorMsg : ''}
+            placeholder={placeholder}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        )}
+      />
+    );
+  };
+
+  const textInput = (): React.ReactNode => {
+    return (
+      <Controller
+        name={name}
+        control={fControl}
+        rules={{ required: validations?.required }}
+        render={({ field, fieldState: { error } }) => (
+          <TextField
+            {...field}
+            label={label}
+            variant="filled"
+            error={!!error}
+            helperText={error ? validations?.customErrorMsg : ''}
+            placeholder={placeholder}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        )}
+      />
+    );
+  };
+
   //determine which type of component is this
   switch (type) {
-    case FormInputType.Number: {
+    case FormInputType.Currency:
+      typedComponent = currencyInput();
       break;
-    }
-    case FormInputType.Phone: {
-      elementType = 'number';
-      inputParams = {
-        inputComponent: TextMaskCustom as any,
-      };
+    case FormInputType.Phone:
+      typedComponent = phoneInput();
       break;
-    }
-    case FormInputType.Currency: {
-      elementType = 'number';
-      inputParams = {
-        startAdornment: <InputAdornment position="start">Q</InputAdornment>,
-        inputComponent: TextMaskCustom as any,
-      };
+    case FormInputType.Number:
+      typedComponent = numericInput();
       break;
-    }
-  }
 
-  return (
-    <Controller
-      name={name}
-      control={fControl}
-      rules={{ required: validations?.required }}
-      render={({ field, fieldState: { error } }) => (
-        <TextField
-          {...field}
-          label={label}
-          type={elementType}
-          variant="filled"
-          error={!!error}
-          helperText={error ? validations?.customErrorMsg : ''}
-          placeholder={placeholder}
-          InputProps={inputParams}
-        />
-      )}
-    />
-  );
+    default:
+      typedComponent = textInput();
+  }
+  return <>{typedComponent}</>;
 };

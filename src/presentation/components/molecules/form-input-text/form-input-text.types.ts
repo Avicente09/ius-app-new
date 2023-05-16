@@ -16,11 +16,6 @@ export interface FormInputTextProps<T extends FieldValues> {
   placeholder?: string;
 }
 
-export interface CustomProps {
-  onChange: (event: { target: { name: string; value: string } }) => void;
-  name: string;
-}
-
 export enum FormInputType {
   Text,
   Number,
