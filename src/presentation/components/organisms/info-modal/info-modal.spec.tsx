@@ -11,7 +11,7 @@ describe('componentsinfo-modal', () => {
           open={true}
           title="Some title"
           type={ModalType.Info}
-          message="Some message in modal"
+          messages={['Some message in modal']}
         />
       )
     ).not.toThrow();

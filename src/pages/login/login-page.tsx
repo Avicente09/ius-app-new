@@ -36,7 +36,7 @@ const loginReducer = (
 const initialState: LoginState = {
   toggleModal: false,
   modalTitle: '',
-  modalMsg: '',
+  modalMsgs: [],
   modalType: ModalType.Info,
 };
 
@@ -59,8 +59,9 @@ export const LoginPage = () => {
       type: 'modalToggle',
       toggleModal: true,
       modalTitle: 'Aviso Importante para los Usuarios',
-      modalMsg:
+      modalMsgs: [
         'Lorem pisupasdsfi asdfpaosdifu dfsfñalsdj pdsifasdf pasdfoiasdfpou',
+      ],
       modalType: ModalType.Info,
     });
   };
@@ -86,8 +87,9 @@ export const LoginPage = () => {
         type: 'modalToggle',
         toggleModal: true,
         modalTitle: 'Lo sentimos, algo salió mal',
-        modalMsg:
+        modalMsgs: [
           'Por favor intenta más tarde, estamos trabajando para solucionar el problema',
+        ],
         modalType: ModalType.Error,
       });
     }
@@ -152,7 +154,7 @@ export const LoginPage = () => {
         open={state.toggleModal}
         title={state.modalTitle}
         type={state.modalType}
-        message={state.modalMsg}
+        messages={state.modalMsgs}
       />
     </Container>
   );

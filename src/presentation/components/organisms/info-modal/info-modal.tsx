@@ -53,6 +53,12 @@ const modalHeader = (modalType: ModalType): ReactNode => {
       headerText = 'INFORMACION';
       headerIcon = <FeedIcon fontSize="large" sx={{ color: 'white' }} />;
       break;
+    case ModalType.Neutro:
+      background = 'text.disabled';
+      headerText = 'AVISO IMPORTANTE';
+      headerIcon = <FeedIcon fontSize="large" sx={{ color: 'white' }} />;
+
+      break;
     default:
       background = 'info.main';
       headerText = 'INFORMACION';
@@ -79,10 +85,22 @@ const modalHeader = (modalType: ModalType): ReactNode => {
 export const InfoModal = ({
   type,
   title,
-  message,
+  messages,
   open,
   onClose,
 }: ModalProps) => {
+  const multipleMessages = (): ReactNode => {
+    if (messages && messages.length > 0) {
+      const result = messages.map((item, index) => (
+        <DialogContentText paragraph id="alert-dialog-description" key={index}>
+          {item}
+        </DialogContentText>
+      ));
+      return <div>{result}</div>;
+    } else {
+      return <div></div>;
+    }
+  };
   return (
     <Dialog
       open={open!}
@@ -93,14 +111,10 @@ export const InfoModal = ({
     >
       {modalHeader(type)}
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          {message}
-        </DialogContentText>
-      </DialogContent>
+      <DialogContent dividers>{multipleMessages()}</DialogContent>
       <DialogActions>
-        <Button onClick={onClose} autoFocus>
-          Cerrar
+        <Button variant="contained" color="success" onClick={onClose}>
+          Aceptar
         </Button>
       </DialogActions>
     </Dialog>

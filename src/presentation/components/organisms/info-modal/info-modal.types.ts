@@ -1,7 +1,7 @@
 export type ModalProps = {
   type: ModalType;
   title?: string;
-  message: string;
+  messages?: Array<string>;
   open?: boolean;
   onClose: () => void;
 };
@@ -11,4 +11,5 @@ export enum ModalType {
   Warning,
   Error,
   Info,
+  Neutro,
 }
