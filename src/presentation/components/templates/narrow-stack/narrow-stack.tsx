@@ -12,6 +12,9 @@ export function NarrowStack({
       sx={{
         display: 'flex',
         width: '100%',
+        height: '100%',
+        backgroundImage: 'url("assets/images/ius-text.svg")',
+        backgroundRepeat: 'repeat',
       }}
     >
       <Box
@@ -27,9 +30,16 @@ export function NarrowStack({
             display: 'flex',
             justifyContent: 'center',
             alignContent: 'center',
+            backgroundColor: '#fff',
+            borderRadius: theme.borderRadius.large,
+            border: `8px solid ${theme.palette.secondary.main}`,
           })}
         >
-          <Typography variant="h2" fontWeight="bold">
+          <Typography
+            variant="h2"
+            fontWeight="bold"
+            color={theme => theme.palette.primary.main}
+          >
             {title}
           </Typography>
         </Box>

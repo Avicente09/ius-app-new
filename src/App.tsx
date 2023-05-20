@@ -1,6 +1,5 @@
-import ThemeProvider from '@mui/system/ThemeProvider';
 import { AuthProvider } from '@presentation/context';
-import { iUSTheme } from '@presentation/theming';
+import { AppThemeProvider, iUSTheme } from '@presentation/theming';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -27,7 +26,7 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={googleClientId}>
       <React.StrictMode>
-        <ThemeProvider theme={iUSTheme}>
+        <AppThemeProvider theme={iUSTheme}>
           <BrowserRouter>
             <AuthProvider value={null}>
               <Routes>
@@ -46,7 +45,7 @@ function App() {
               </Routes>
             </AuthProvider>
           </BrowserRouter>
-        </ThemeProvider>
+        </AppThemeProvider>
       </React.StrictMode>
     </GoogleOAuthProvider>
   );

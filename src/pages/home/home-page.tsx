@@ -1,4 +1,8 @@
-import { InfoModal, MainMenu, ModalType } from '@presentation/components/organisms';
+import {
+  InfoModal,
+  MainMenu,
+  ModalType,
+} from '@presentation/components/organisms';
 import { NarrowStack } from '@presentation/components/templates';
 import { useAuth } from '@presentation/hooks';
 import { useEffect, useReducer } from 'react';
@@ -57,10 +61,8 @@ export function HomePage(): JSX.Element {
   }, [user, isLoading, navigate]);
 
   return (
-    <div>
-      <NarrowStack title="SERVICIOS">
-        <MainMenu />
-      </NarrowStack>
+    <NarrowStack title="SERVICIOS">
+      <MainMenu />
       <InfoModal
         onClose={handleCloseModal}
         open={state.toggleModal}
@@ -68,6 +70,6 @@ export function HomePage(): JSX.Element {
         type={state.modalType}
         messages={state.modalMsgs}
       />
-    </div>
+    </NarrowStack>
   );
 }
