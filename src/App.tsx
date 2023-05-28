@@ -16,6 +16,11 @@ const routes = [
     path: 'login',
     page: lazy(() => import('./pages/login')),
   },
+  {
+    index: false,
+    path: '/package',
+    page: lazy(() => import('./pages/package')),
+  },
 ];
 
 function Loading() {

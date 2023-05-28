@@ -34,6 +34,7 @@ export const FormInputText = ({
             customInput={TextField}
             label={label}
             error={!!error}
+            variant="filled"
             helperText={error ? validations?.customErrorMsg : ''}
             placeholder={placeholder}
             InputLabelProps={{
@@ -62,6 +63,7 @@ export const FormInputText = ({
             error={!!error}
             helperText={error ? validations?.customErrorMsg : ''}
             placeholder={placeholder}
+            variant="filled"
             InputLabelProps={{
               shrink: true,
             }}
