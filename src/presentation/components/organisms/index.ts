@@ -1,3 +1,4 @@
+export * from './food-form';
 export * from './footer';
 export * from './header';
 export * from './info-modal';

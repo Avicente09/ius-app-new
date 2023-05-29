@@ -21,6 +21,11 @@ const routes = [
     path: '/package',
     page: lazy(() => import('./pages/package')),
   },
+  {
+    index: false,
+    path: '/food',
+    page: lazy(() => import('./pages/food')),
+  },
 ];
 
 function Loading() {
