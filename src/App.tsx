@@ -25,6 +25,10 @@ const routes = [
     index: false,
     path: '/food',
     page: lazy(() => import('./pages/food')),
+  }, {
+    index: false,
+    path: '/purchase',
+    page: lazy(() => import('./pages/purchase')),
   },
 ];
 

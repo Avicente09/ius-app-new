@@ -4,45 +4,61 @@ import { FormInputText } from '@presentation/components/molecules';
 import type { FieldValues } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
-interface FoodFormProps {
+interface PurchaseFormProps {
   onSubmit: (data: FieldValues) => void;
 }
 
 const defaultValues: FieldValues = {
-  restaurant: '',
-  menuComboDetailAndQuantity: '',
-  deliveryLocation: '',
+  shopPlace: '',
+  buyPosition: '',
+  purchaseDetail: '',
+  referencePhotos: '',
+  deliveryLocationl: '',
 };
-export const FoodForm = ({ onSubmit }: FoodFormProps) => {
+export const PurchaseForm = ({ onSubmit }: PurchaseFormProps) => {
   const { handleSubmit, control } = useForm({ defaultValues });
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <FormInputText
-          name="restaurant"
+          name="shopPlace"
           fControl={control}
-          label="Restaurante"
+          label="Lugar de Compra"
           validations={{
             required: true,
-            customErrorMsg: 'El campo restaurante es requerido',
+            customErrorMsg: 'El campo lugar de compra es requerido',
           }}
         />
       </Grid>
       <Grid item xs={12}>
         <FormInputText
-          name="menuComboDetailAndQuantity"
+          name="buyPosition"
           fControl={control}
-          label="Detalle de Menú o Combo y Cantidad"
+          label="Posicion de Compra"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormInputText
+          name="purchaseDetail"
+          fControl={control}
+          label="Detalle de Compra"
           validations={{
             required: true,
-            customErrorMsg: 'El campo detalle es requerido',
+            customErrorMsg: 'El campo detalle de compra es requerido',
           }}
         />
       </Grid>
       <Grid item xs={12}>
         <FormInputText
-          name="deliveryLocation"
+          name="referencePhotos"
+          fControl={control}
+          label="Fotos de referencia"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormInputText
+          name="deliveryLocationl"
           fControl={control}
           label="Ubicación de entrega"
           validations={{
