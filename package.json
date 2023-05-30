@@ -29,12 +29,12 @@
     "build": "craco build",
     "eject": "craco eject",
     "test": "jest --coverage",
-    "typescript": "tsc --project tsconfig.json --noEmit",
+    "check-types": "tsc --project tsconfig.json --noEmit",
     "lint-staged": "lint-staged --config lint-staged.config.js",
     "prepare": "husky install",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",
-    "validate": "npm run lint && npm run test && npm run build"
+    "validate": "npm run check-types && npm run lint && npm run test && npm run build"
   },
   "browserslist": {
     "production": [

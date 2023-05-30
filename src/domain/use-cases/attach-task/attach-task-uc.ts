@@ -8,7 +8,7 @@ export function attachTaskUC(
   const { getExistingDraftOrder, createNewDraftOrder, saveOrder } = provider;
 
   return getExistingDraftOrder()
-    .then(order => order || createNewDraftOrder())
+    .then(order => order ?? createNewDraftOrder())
     .then(order => {
       // TODO: Improve this logic with validations and error handling
       order.tasks.push(task);

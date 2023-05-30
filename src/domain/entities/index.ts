@@ -6,4 +6,5 @@ export * from './gt-address';
 export * from './order';
 export * from './task';
 export * from './trip';
+export * from './use-case';
 export * from './user';

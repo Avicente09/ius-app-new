@@ -1,3 +1,4 @@
+import { OrderProvider } from '@implementation/context/order';
 import { AuthProvider } from '@presentation/context';
 import { AppThemeProvider, iUSTheme } from '@presentation/theming';
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -25,10 +26,16 @@ const routes = [
     index: false,
     path: '/food',
     page: lazy(() => import('./pages/food')),
-  }, {
+  },
+  {
     index: false,
     path: '/purchase',
     page: lazy(() => import('./pages/purchase')),
+  },
+  {
+    index: false,
+    path: '/summary',
+    page: lazy(() => import('./pages/summary')),
   },
 ];
 
@@ -43,20 +50,22 @@ function App() {
         <AppThemeProvider theme={iUSTheme}>
           <BrowserRouter>
             <AuthProvider value={null}>
-              <Routes>
-                {routes.map(({ index, path, page: Page }) => (
-                  <Route
-                    key={`route-${path ?? 'index'}`}
-                    index={index}
-                    path={path}
-                    element={
-                      <Suspense fallback={<Loading />}>
-                        <Page />
-                      </Suspense>
-                    }
-                  />
-                ))}
-              </Routes>
+              <OrderProvider>
+                <Routes>
+                  {routes.map(({ index, path, page: Page }) => (
+                    <Route
+                      key={`route-${path ?? 'index'}`}
+                      index={index}
+                      path={path}
+                      element={
+                        <Suspense fallback={<Loading />}>
+                          <Page />
+                        </Suspense>
+                      }
+                    />
+                  ))}
+                </Routes>
+              </OrderProvider>
             </AuthProvider>
           </BrowserRouter>
         </AppThemeProvider>

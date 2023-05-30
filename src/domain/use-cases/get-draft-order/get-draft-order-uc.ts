@@ -6,5 +6,5 @@ export function getDraftOrderUC(
 ): Promise<Order> {
   const { getExistingDraftOrder, createNewDraftOrder } = provider;
 
-  return getExistingDraftOrder().then(order => order || createNewDraftOrder());
+  return getExistingDraftOrder().then(order => order ?? createNewDraftOrder());
 }

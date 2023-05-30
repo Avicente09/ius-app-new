@@ -43,7 +43,7 @@ export const GT_PLACES = {
   SanMarcos: ['SanMarcos'],
   SantaRosa: ['Cuilapa'],
   Solola: ['Solola'],
-  Suchitepequez: ['Mazatenango'],
+  Suchitepequez: ['Mazatenango', 'PuebloNuevo'],
   Totonicapan: ['Totonicapan'],
   Zacapa: ['Zacapa'],
 } as const;

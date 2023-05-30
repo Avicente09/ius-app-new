@@ -27,7 +27,7 @@ export interface TaskByGtAddress {
   status: TaskStatus;
   address: GtAddress;
   instruction: string;
-  details: Record<TaskDetail, 'string'>;
+  details?: Record<TaskDetail, 'string'>;
   dependencies?: EntityId[];
 }
 
