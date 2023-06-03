@@ -34,6 +34,11 @@ const routes = [
   },
   {
     index: false,
+    path: '/little-errands',
+    page: lazy(() => import('./pages/little-errands')),
+  },
+  {
+    index: false,
     path: '/summary',
     page: lazy(() => import('./pages/summary')),
   },
