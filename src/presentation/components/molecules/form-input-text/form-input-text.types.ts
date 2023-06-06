@@ -1,4 +1,4 @@
-import type { Control, FieldValues } from 'react-hook-form';
+import type { Control, FieldValues, Path } from 'react-hook-form';
 
 export interface FormInputTextValidations {
   required: boolean;
@@ -7,7 +7,7 @@ export interface FormInputTextValidations {
 }
 
 export interface FormInputTextProps<T extends FieldValues> {
-  name: string;
+  name: Path<T>;
   label: string;
   type?: FormInputType;
   mask?: string;

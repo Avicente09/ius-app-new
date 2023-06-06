@@ -1,5 +1,4 @@
 import TextField from '@mui/material/TextField';
-import * as React from 'react';
 import type { FieldValues } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { NumericFormat, PatternFormat } from 'react-number-format';
@@ -7,20 +6,20 @@ import { NumericFormat, PatternFormat } from 'react-number-format';
 import type { FormInputTextProps } from './form-input-text.types';
 import { FormInputType } from './form-input-text.types';
 
-export const FormInputText = ({
+export function FormInputText<TFieldValues extends FieldValues>({
   name,
   label,
   type = FormInputType.Text,
   fControl,
   validations,
   placeholder,
-}: FormInputTextProps<FieldValues>) => {
+}: FormInputTextProps<TFieldValues>): JSX.Element {
   let typedComponent: React.ReactNode;
 
   //Functions to render every component according to its type
   const phoneInput = (): React.ReactNode => {
     return (
-      <Controller
+      <Controller<TFieldValues>
         name={name}
         control={fControl}
         rules={{ required: validations?.required }}
@@ -67,6 +66,7 @@ export const FormInputText = ({
             InputLabelProps={{
               shrink: true,
             }}
+            fullWidth
           />
         )}
       />
@@ -90,6 +90,7 @@ export const FormInputText = ({
             InputLabelProps={{
               shrink: true,
             }}
+            fullWidth
           />
         )}
       />
@@ -113,6 +114,7 @@ export const FormInputText = ({
             InputLabelProps={{
               shrink: true,
             }}
+            fullWidth
           />
         )}
       />
@@ -135,4 +137,4 @@ export const FormInputText = ({
       typedComponent = textInput();
   }
   return <>{typedComponent}</>;
-};
+}

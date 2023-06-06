@@ -2,7 +2,7 @@ import type { Theme, ThemeOptions } from '@mui/material/styles';
 import { createTheme } from '@mui/material/styles';
 import deepmerge from '@mui/utils/deepmerge';
 
-import type { BorderRadius, GreyShades } from '../../types';
+import type { BorderRadius, Colors, GreyShades } from '../../types';
 
 const grayShades: GreyShades = {
   100: 'hsl(0, 0%, 100%)',
@@ -24,9 +24,15 @@ const borderRadius: BorderRadius = {
   full: '100%',
 };
 
+const colors: Colors = {
+  white: '#ffffff',
+  black: '#000000',
+};
+
 const extraOptions = {
   grayShades,
   borderRadius,
+  colors,
 };
 
 const baseOptions: ThemeOptions = {

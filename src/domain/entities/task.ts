@@ -2,7 +2,7 @@ import type { EntityId } from './entity';
 import type { GpsLocation } from './gps-location';
 import type { GtAddress } from './gt-address';
 
-export const TASK_TYPES = ['pick', 'deliver'] as const;
+export const TASK_TYPES = ['pickUp', 'deliver'] as const;
 export type TaskType = typeof TASK_TYPES[number];
 
 export const TASK_STATUSES = ['pending', 'done'];

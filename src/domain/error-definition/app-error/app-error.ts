@@ -39,5 +39,9 @@ export class AppError<TErrorCode extends string = ErrorCode> extends Error {
       rootCause: identifyRootCause(source),
     });
   }
+
+  static rejectionHandler<T>(): (reason: unknown) => Promise<T> {
+    return reason => Promise.reject(AppError.assert(reason));
+  }
   //#endregion static
 }

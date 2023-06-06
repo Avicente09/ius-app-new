@@ -4,9 +4,8 @@ import {
   ModalType,
 } from '@presentation/components/organisms';
 import { NarrowStack } from '@presentation/components/templates';
-import { useAuth } from '@presentation/hooks';
+import { withAuth } from '@presentation/hoc/with-auth';
 import { useEffect, useReducer } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import type {
   LoginAction,
@@ -32,9 +31,7 @@ const initialState: LoginState = {
   modalType: ModalType.Info,
 };
 
-export function HomePage(): JSX.Element {
-  const { user, isLoading } = useAuth();
-  const navigate = useNavigate();
+function Page(): JSX.Element {
   const [state, dispatch] = useReducer(loginReducer, initialState);
   const handleCloseModal = () =>
     dispatch({ type: 'modalToggle', toggleModal: false });
@@ -54,11 +51,8 @@ export function HomePage(): JSX.Element {
   };
 
   useEffect(() => {
-    if (!user && !isLoading) {
-      navigate('/login');
-    }
     triggerModal();
-  }, [user, isLoading, navigate]);
+  }, []);
 
   return (
     <NarrowStack title="SERVICIOS">
@@ -73,3 +67,5 @@ export function HomePage(): JSX.Element {
     </NarrowStack>
   );
 }
+
+export const HomePage = withAuth(Page);

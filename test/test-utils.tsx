@@ -10,13 +10,6 @@ import { iUSTheme } from '../src/presentation/theming';
 
 export type CustomRenderOptions = Omit<RenderOptions, 'queries'>;
 
-function setup(jsx: React.ReactElement | JSX.Element) {
-  return {
-    user: userEvent,
-    ...render(jsx),
-  };
-}
-
 export function AllTheProviders({ children }: PropsWithChildren) {
   return (
     <ThemeProvider theme={iUSTheme}>
@@ -32,6 +25,13 @@ const customRender = (
     wrapper: props => <AllTheProviders {...props} />,
     ...options,
   });
+
+function setup(jsx: React.ReactElement | JSX.Element) {
+  return {
+    user: userEvent,
+    ...customRender(jsx),
+  };
+}
 
 export * from '@testing-library/react';
 export { customRender as render, setup };

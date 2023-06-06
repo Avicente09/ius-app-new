@@ -9,3 +9,8 @@ export interface BorderRadius {
   large: string;
   full: string;
 }
+
+export interface Colors {
+  white: string;
+  black: string;
+}

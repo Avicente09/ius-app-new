@@ -1,61 +1,70 @@
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import { FormInputText } from '@presentation/components/molecules';
-import type { FieldValues } from 'react-hook-form';
+import Typography from '@mui/material/Typography';
+import { Form, FormInputText } from '@presentation/components/molecules';
 import { useForm } from 'react-hook-form';
 
-interface FoodFormProps {
-  onSubmit: (data: FieldValues) => void;
-}
+import { defaultValues } from './food-form.config';
+import type { FoodFormProps } from './food-form.types';
 
-const defaultValues: FieldValues = {
-  restaurant: '',
-  menuComboDetailAndQuantity: '',
-  deliveryLocation: '',
-};
 export const FoodForm = ({ onSubmit }: FoodFormProps) => {
   const { handleSubmit, control } = useForm({ defaultValues });
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <FormInputText
-          name="restaurant"
-          fControl={control}
-          label="Restaurante"
-          validations={{
-            required: true,
-            customErrorMsg: 'El campo restaurante es requerido',
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} marginBottom={theme => theme.spacing(4)}>
+          <Typography align="center" variant="h6">
+            Detalla lo más específico posible.
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <FormInputText
+            name="restaurant"
+            fControl={control}
+            label="Restaurante"
+            validations={{
+              required: true,
+              customErrorMsg: 'El campo restaurante es requerido',
+            }}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <FormInputText
+            name="menuComboDetailAndQuantity"
+            fControl={control}
+            label="Detalle de Menú o Combo y Cantidad"
+            validations={{
+              required: true,
+              customErrorMsg: 'El campo detalle es requerido',
+            }}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <FormInputText
+            name="deliveryLocation"
+            fControl={control}
+            label="Ubicación de entrega"
+            validations={{
+              required: true,
+              customErrorMsg: 'El campo ubicación de entrega es requerido',
+            }}
+          />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          mt={theme => theme.spacing(4)}
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
           }}
-        />
+        >
+          <Button type="submit" variant={'contained'}>
+            Agregar a la Orden
+          </Button>
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <FormInputText
-          name="menuComboDetailAndQuantity"
-          fControl={control}
-          label="Detalle de Menú o Combo y Cantidad"
-          validations={{
-            required: true,
-            customErrorMsg: 'El campo detalle es requerido',
-          }}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <FormInputText
-          name="deliveryLocation"
-          fControl={control}
-          label="Ubicación de entrega"
-          validations={{
-            required: true,
-            customErrorMsg: 'El campo ubicación de entrega es requerido',
-          }}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <Button onClick={handleSubmit(onSubmit)} variant={'contained'}>
-          Submit
-        </Button>
-      </Grid>
-    </Grid>
+    </Form>
   );
 };

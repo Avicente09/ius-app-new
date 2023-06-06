@@ -1,5 +1,5 @@
-import { OrderProvider } from '@implementation/context/order';
-import { AuthProvider } from '@presentation/context';
+import { AuthProvider } from '@presentation/context/auth';
+import { OrderProvider } from '@presentation/context/order';
 import { AppThemeProvider, iUSTheme } from '@presentation/theming';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import React, { lazy, Suspense } from 'react';

@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import styled from '@mui/system/styled';
-import { useAuth } from '@presentation/hooks';
+import { useAuth } from '@presentation/hooks/use-auth';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

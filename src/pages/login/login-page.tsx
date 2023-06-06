@@ -11,7 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { InfoModal, ModalType } from '@presentation/components/organisms';
-import { useAuth } from '@presentation/hooks';
+import { useAuth } from '@presentation/hooks/use-auth';
 import type { CredentialResponse } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import jwt from 'jwt-decode';
