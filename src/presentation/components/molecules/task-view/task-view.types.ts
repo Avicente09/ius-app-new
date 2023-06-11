@@ -1,5 +1,7 @@
-import type { Task } from '@domain/entities';
+import type { EntityId, Order } from '@domain/entities';
 
 export interface TaskViewProps {
-  task: Task;
+  mainTaskId: EntityId;
+  order: Order;
+  onRemove: (taskId: EntityId) => void;
 }

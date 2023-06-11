@@ -1,9 +1,9 @@
 import type { Order } from '@domain/entities';
 import type { AttachFoodDeliveryTasksRepository } from '@domain/repositories';
 import { attachFoodDeliveryTasksUC } from '@domain/use-cases/attach-food-delivery-tasks';
-import { createPickUpTaskFromFoodFormFieldsFactory } from '@implementation/adapters/create-delivery-task-from-food-form-fields';
+import { createDeliveryTaskFromFoodFormFieldsFactory } from '@implementation/adapters/create-delivery-task-from-food-form-fields';
 import { createDraftOrder } from '@implementation/adapters/create-draft-order';
-import { createDeliveryTaskFromFoodFormFieldsFactory } from '@implementation/adapters/create-pick-up-task-from-food-form-fields';
+import { createPickUpTaskFromFoodFormFieldsFactory } from '@implementation/adapters/create-pick-up-task-from-food-form-fields';
 import { setOrderWithSyncSetterFactory } from '@implementation/adapters/set-order-with-sync-setter';
 import type { FoodFormFieldValues } from '@presentation/components/organisms';
 import { FoodForm } from '@presentation/components/organisms';

@@ -5,7 +5,7 @@ import type { GtAddress } from './gt-address';
 export const TASK_TYPES = ['pickUp', 'deliver'] as const;
 export type TaskType = typeof TASK_TYPES[number];
 
-export const TASK_STATUSES = ['pending', 'done'];
+export const TASK_STATUSES = ['pending', 'done'] as const;
 export type TaskStatus = typeof TASK_STATUSES[number];
 
 export const TASK_DETAILS = ['cost', 'estimatedCost', 'disclaimer'] as const;

@@ -22,14 +22,14 @@ module.exports = {
     '@presentation/(.*)': '<rootDir>/src/presentation/$1',
     '@utils/(.*)': '<rootDir>/src/utils/$1',
   },
-  coveragePathIgnorePatterns: ['mocks', 'test', 'index.ts'],
+  coveragePathIgnorePatterns: ['mocks', 'test', 'index.ts', 'config'],
   coverageReporters: ['clover', 'json', 'lcov', 'text'],
   coverageThreshold: {
     global: {
-      statements: 44,
-      branches: 28,
-      functions: 25,
-      lines: 43,
+      statements: 60,
+      branches: 54,
+      functions: 54,
+      lines: 59,
     },
   },
 };

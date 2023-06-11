@@ -3,7 +3,7 @@ import type { GetTaskRepository } from '@domain/repositories';
 
 import type { CreatePickUpTaskFromFoodFormFieldsFactoryParams } from './create-pick-up-task-from-food-form-fields-factory.types';
 
-export function createDeliveryTaskFromFoodFormFieldsFactory({
+export function createPickUpTaskFromFoodFormFieldsFactory({
   fields,
 }: CreatePickUpTaskFromFoodFormFieldsFactoryParams): GetTaskRepository {
   return () => {
@@ -18,7 +18,7 @@ export function createDeliveryTaskFromFoodFormFieldsFactory({
         village: 'Pasac 2',
         address: 'Av. Francisco Rodas 1-54A',
       },
-      instruction: fields.instruction,
+      instruction: fields.menuComboDetailAndQuantity,
     };
 
     return Promise.resolve(pickUpTask);
