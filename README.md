@@ -126,6 +126,119 @@ Also a commit hook was added to set commit message rules, we are using Config Co
 
 - commitlint-config.cjs
 
+#### Custom Font Families
+Two custom font families (Urbani and Nexa) were added to the mui theme. Each one is divided in three sets as follows:
+
+Name: Urbani
+Font Weight: 400
+File: @presentatio/theming/fonts/urbani-regular.woff2
+
+Name: Urbani-Light
+Font Weight: 300
+File: @presentatio/theming/fonts/urbani-light.woff2
+
+Name: Urbani-Regular
+Font Weight: 400
+File: @presentatio/theming/fonts/urbani-regular.woff2
+
+Name: Urbani-Bold
+Font Weight: 700
+File: @presentatio/theming/fonts/urbani-bold.woff2
+
+Name: Nexa
+Font Weight: 400
+File: @presentatio/theming/fonts/nexa-regular.woff2
+
+Name: Nexa-Light
+Font Weight: 400
+File: @presentatio/theming/fonts/nexa-light.woff2
+
+Name: Nexa-Regular
+Font Weight: 400
+File: @presentatio/theming/fonts/nexa-regular.woff2
+
+Name: Nexa-Bold
+Font Weight: 700
+File: @presentatio/theming/fonts/nexa-bold.woff2
+
+**Note:** Nexa and Urbani make reference to the Regular type of each font.
+##### Priority Order
+There were loaded to MUI theme in the following priority order:
+1. Urbani
+2. Nexa
+3. Helvetica (as a fallback)
+
+##### MUI Typography Variants Customization
+MUI typography comes with a predefined set of variants which are:
+* h1
+* h2
+* h3
+* h4
+* h5
+* h6
+* subtitle1
+* subtitle2
+* body1
+* body2
+* button
+* caption
+* overline
+
+These variants were modified to use the fonts as follows:
+```bash
+h1: {
+    fontFamily: 'Urbani-Bold',
+  },
+  h2: {
+    fontFamily: 'Urbani-Bold',
+  },
+  h3: {
+    fontFamily: 'Urbani-Bold',
+  },
+  h4: {
+    fontFamily: 'Urbani',
+  },
+  h5: {
+    fontFamily: 'Urbani',
+  },
+  h6: {
+    fontFamily: 'Urbani',
+  },
+  subtitle1: {
+    fontFamily: 'Nexa',
+  },
+  subtitle2: {
+    fontFamily: 'Nexa',
+  },
+  body1: {
+    fontFamily: 'Nexa',
+  },
+  body2: {
+    fontFamily: 'Nexa',
+  },
+  button: {
+    fontFamily: 'Nexa',
+  },
+  caption: {
+    fontFamily: 'Nexa',
+  },
+  overline: {
+    fontFamily: 'Nexa',
+  },
+```
+##### Usage:
+
+```bash
+<Box fontFamily="Urbani" fontWeight="900">Example of Urbani with Fontweight 900</Box>
+<Box fontFamily="Urbani-Light">This is an example of Urbani-Light</Box>
+<Box fontFamily="Urbani-Regular">This is an example of Urbani-Regular</Box>
+<Box fontFamily="Urbani-Bold">This is an example of Urbani-Bold</Box>
+<Box fontFamily="Nexa" fontWeight="900">Example of Nexa with Fontweight 900</Box>
+<Box fontFamily="Nexa-Light">This is an example of Nexa-Light</Box>
+<Box fontFamily="Nexa-Regular">This is an example of Nexa-Regular</Box>
+<Box fontFamily="Nexa-Bold">This is an example of Nexa-Bold</Box>
+```
+
 [atomic design]: https://bradfrost.com/blog/post/atomic-web-design/
 [hexagonal architecture]: https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)
 [clean architecture]: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html

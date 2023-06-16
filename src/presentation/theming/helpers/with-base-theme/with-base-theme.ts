@@ -1,8 +1,73 @@
-import type { Theme, ThemeOptions } from '@mui/material/styles';
-import { createTheme } from '@mui/material/styles';
+import type {
+  Theme,
+  ThemeOptions,
+  TypographyVariantsOptions,
+} from '@mui/material/styles';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import deepmerge from '@mui/utils/deepmerge';
+import NexaBoldFont from '@presentation/theming/fonts/nexa-bold.woff2';
+import NexaBookFont from '@presentation/theming/fonts/nexa-book.woff2';
+import NexaLightFont from '@presentation/theming/fonts/nexa-light.woff2';
+import UrbaniBoldFont from '@presentation/theming/fonts/urbani-bold.woff2';
+import UrbaniLightFont from '@presentation/theming/fonts/urbani-light.woff2';
+import UrbaniRegularFont from '@presentation/theming/fonts/urbani-regular.woff2';
 
 import type { BorderRadius, Colors, GreyShades } from '../../types';
+
+const fontFaces = `
+@font-face {
+  font-family: 'Nexa';
+  font-weight: 400;
+  src: url(${NexaBookFont}) format('woff2');
+}
+
+  @font-face {
+    font-family: 'Nexa-Light';
+    font-style: light;
+    font-weight: 300;
+    src: local('Nexa'), local('Nexa-Light'), url(${NexaLightFont}) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Nexa-Regular';
+    font-style: regular;
+    font-weight: 400;
+    src: local('Nexa'), local('Nexa-Regular'), url(${NexaBookFont}) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Nexa-Bold';
+    font-style: bold;
+    font-weight: 700;
+    src: local('Nexa'), local('Nexa-Bold'), url(${NexaBoldFont}) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Urbani';
+    src: url(${UrbaniRegularFont}) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Urbani-Light';
+    font-style: light;
+    font-weight: 300;
+    src: local('Urbani'), local('Urbani-Light'), url(${UrbaniLightFont}) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Urbani-Regular';
+    font-style: regular;
+    font-weight: 400;
+    src: local('Urbani'), local('Urbani-Regular'), url(${UrbaniRegularFont}) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Urbani-Bold';
+    font-style: bold;
+    font-weight: 700;
+    src: local('Urbani'), local('Urbani-Bold'), url(${UrbaniBoldFont}) format('woff2');
+  }
+`;
 
 const grayShades: GreyShades = {
   100: 'hsl(0, 0%, 100%)',
@@ -35,6 +100,49 @@ const extraOptions = {
   colors,
 };
 
+const typographyBaseConfig: TypographyVariantsOptions = {
+  fontFamily: 'Urbani, Nexa, Helvetica',
+  h1: {
+    fontFamily: 'Urbani-Bold',
+  },
+  h2: {
+    fontFamily: 'Urbani-Bold',
+  },
+  h3: {
+    fontFamily: 'Urbani-Bold',
+  },
+  h4: {
+    fontFamily: 'Urbani',
+  },
+  h5: {
+    fontFamily: 'Urbani',
+  },
+  h6: {
+    fontFamily: 'Urbani',
+  },
+  subtitle1: {
+    fontFamily: 'Nexa',
+  },
+  subtitle2: {
+    fontFamily: 'Nexa',
+  },
+  body1: {
+    fontFamily: 'Nexa',
+  },
+  body2: {
+    fontFamily: 'Nexa',
+  },
+  button: {
+    fontFamily: 'Nexa',
+  },
+  caption: {
+    fontFamily: 'Nexa',
+  },
+  overline: {
+    fontFamily: 'Nexa',
+  },
+};
+
 const baseOptions: ThemeOptions = {
   spacing: [0, 4, 8, 12, 16, 24, 32, 40, 48, 60],
   palette: {
@@ -57,8 +165,16 @@ const baseOptions: ThemeOptions = {
       contrastText: '#ffffff',
     },
   },
+  typography: typographyBaseConfig,
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: fontFaces,
+    },
+  },
 };
 
 export function withBaseTheme(options?: ThemeOptions): Theme {
-  return createTheme(deepmerge(baseOptions, options), extraOptions);
+  return responsiveFontSizes(
+    createTheme(deepmerge(baseOptions, options), extraOptions)
+  );
 }

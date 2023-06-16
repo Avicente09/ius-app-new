@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import CssBaseline from '@mui/material/CssBaseline';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import ThemeProvider from '@mui/system/ThemeProvider';
 
@@ -10,6 +11,7 @@ export function AppThemeProvider({
 }: AppThemeProviderProps): JSX.Element {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <GlobalStyles
         styles={css`
           html,
