@@ -1,6 +1,7 @@
 import type { UseCase } from '@domain/entities';
 import { AppError } from '@domain/error-definition';
-import { useCallback, useMemo, useReducer } from 'react';
+import { useMemoFromObjectDeps } from '@utils/hook/use-memo-from-object-deps';
+import { useCallback, useReducer } from 'react';
 
 import type {
   InvokeBusinessHook,
@@ -31,11 +32,10 @@ export function createInvokeBusinessHook<
 
   return factoryParams => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const actualProvider = useMemo(
+
+    const actualProvider = useMemoFromObjectDeps(
       () => (provider instanceof Function ? provider(factoryParams) : provider),
-      // TODO: Fix this dependency check to be lint compliant
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [...Object.values(factoryParams as {})]
+      factoryParams
     );
 
     const invoke = useCallback(

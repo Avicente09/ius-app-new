@@ -20,10 +20,10 @@ export function useLoadableFromLocalStorage<TData>({
 
   useEffect(() => {
     const item = localStorage.getItem(key);
-    if (item && state.status === 'loading')
+    if (state.status === 'loading')
       dispatch({
         status: 'ready',
-        data: JSON.parse(item) as TData,
+        data: item ? (JSON.parse(item) as TData) : undefined,
       });
   }, [dispatch, key, state.status]);
 

@@ -6,11 +6,12 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
+import { OrderProvider } from '../src/presentation/context/order';
 import { iUSTheme } from '../src/presentation/theming';
 
 export type CustomRenderOptions = Omit<RenderOptions, 'queries'>;
 
-export function AllTheProviders({ children }: PropsWithChildren) {
+export function BaseProviders({ children }: PropsWithChildren) {
   return (
     <ThemeProvider theme={iUSTheme}>
       <BrowserRouter>{children}</BrowserRouter>
@@ -22,7 +23,7 @@ const customRender = (
   options?: CustomRenderOptions
 ) =>
   render(ui, {
-    wrapper: props => <AllTheProviders {...props} />,
+    wrapper: props => <BaseProviders {...props} />,
     ...options,
   });
 
@@ -33,5 +34,27 @@ function setup(jsx: React.ReactElement | JSX.Element) {
   };
 }
 
+export function PageProviders({ children }: PropsWithChildren) {
+  return (
+    <BaseProviders>
+      <OrderProvider>{children}</OrderProvider>
+    </BaseProviders>
+  );
+}
+const renderPage = (
+  ui: React.ReactElement | JSX.Element,
+  options?: CustomRenderOptions
+) =>
+  render(ui, {
+    wrapper: props => <PageProviders {...props} />,
+    ...options,
+  });
+function setupPage(jsx: React.ReactElement | JSX.Element) {
+  return {
+    user: userEvent,
+    ...renderPage(jsx),
+  };
+}
+
 export * from '@testing-library/react';
-export { customRender as render, setup };
+export { customRender as render, renderPage, setup, setupPage };

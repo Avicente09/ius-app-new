@@ -10,8 +10,6 @@ describe('implementation:adapters:create-pick-up-task-from-food-form-fields', ()
       },
     } as any)();
 
-    console.log('[>] pickUpTask: ', pickUpTask);
-
     expect(pickUpTask).toStrictEqual({
       id: '1',
       type: 'pickUp',

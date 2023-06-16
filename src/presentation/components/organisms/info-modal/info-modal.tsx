@@ -57,12 +57,6 @@ const modalHeader = (modalType: ModalType): ReactNode => {
       background = 'text.disabled';
       headerText = 'AVISO IMPORTANTE';
       headerIcon = <FeedIcon fontSize="large" sx={{ color: 'white' }} />;
-
-      break;
-    default:
-      background = 'info.main';
-      headerText = 'INFORMACION';
-      headerIcon = <FeedIcon fontSize="large" sx={{ color: 'white' }} />;
       break;
   }
 
