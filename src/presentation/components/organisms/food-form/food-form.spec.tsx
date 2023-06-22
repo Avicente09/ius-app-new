@@ -1,15 +1,24 @@
+import { useForm } from 'react-hook-form';
+
 import { render, setup, waitFor } from '../../../../../test/test-utils';
 import { FoodForm } from './food-form';
+import { defaultValues } from './food-form.config';
 
-describe('presentation:components:organisms:food-form', () => {
+describe('presentation:components:organisms:food-form:control', () => {
+  function WrappedForm({ onSubmit = jest.fn() }) {
+    const { control, handleSubmit } = useForm({ defaultValues });
+
+    return <FoodForm control={control} onSubmit={handleSubmit(onSubmit)} />;
+  }
+
   test('It should render without crashing', () => {
-    expect(() => render(<FoodForm onSubmit={jest.fn()} />)).not.toThrow();
+    expect(() => render(<WrappedForm />)).not.toThrow();
   });
 
   test('It should fill the [Restaurant] field', async () => {
     expect.hasAssertions();
 
-    const { getByLabelText, user } = setup(<FoodForm onSubmit={jest.fn()} />);
+    const { getByLabelText, user } = setup(<WrappedForm />);
     const restaurantInput = getByLabelText(/Restaurante/i);
     expect(restaurantInput).toBeInTheDocument();
     await user.type(restaurantInput, 'McDonalds');
@@ -19,7 +28,7 @@ describe('presentation:components:organisms:food-form', () => {
   test('It should fill the [MenuComboDetailAndQuantity] field', async () => {
     expect.hasAssertions();
 
-    const { getByLabelText, user } = setup(<FoodForm onSubmit={jest.fn()} />);
+    const { getByLabelText, user } = setup(<WrappedForm />);
     const menuComboDetailAndQuantityInput = getByLabelText(
       /Detalle de Menú o Combo y Cantidad/i
     );
@@ -31,7 +40,7 @@ describe('presentation:components:organisms:food-form', () => {
   test('It should fill the [DeliveryLocation] field', async () => {
     expect.hasAssertions();
 
-    const { getByLabelText, user } = setup(<FoodForm onSubmit={jest.fn()} />);
+    const { getByLabelText, user } = setup(<WrappedForm />);
     const deliveryLocationInput = getByLabelText(/Ubicación de entrega/i);
     expect(deliveryLocationInput).toBeInTheDocument();
     await user.type(deliveryLocationInput, 'Calle 123');
@@ -42,7 +51,7 @@ describe('presentation:components:organisms:food-form', () => {
 
     const onSubmit = jest.fn();
     const { getByLabelText, getByText, user } = setup(
-      <FoodForm onSubmit={onSubmit} />
+      <WrappedForm onSubmit={onSubmit} />
     );
     await user.type(getByLabelText(/Restaurante/i), 'McDonalds');
     await user.type(
@@ -65,7 +74,7 @@ describe('presentation:components:organisms:food-form', () => {
 
     const onSubmit = jest.fn();
     const { getByLabelText, getByText, user } = setup(
-      <FoodForm onSubmit={onSubmit} />
+      <WrappedForm onSubmit={onSubmit} />
     );
     await user.type(
       getByLabelText(/Detalle de Menú o Combo y Cantidad/i),
@@ -88,7 +97,7 @@ describe('presentation:components:organisms:food-form', () => {
 
     const onSubmit = jest.fn();
     const { getByLabelText, getByText, user } = setup(
-      <FoodForm onSubmit={onSubmit} />
+      <WrappedForm onSubmit={onSubmit} />
     );
     await user.type(getByLabelText(/Restaurante/i), 'McDonalds');
     await user.type(getByLabelText(/Ubicación de entrega/i), 'Calle 123');
@@ -106,7 +115,7 @@ describe('presentation:components:organisms:food-form', () => {
 
     const onSubmit = jest.fn();
     const { getByLabelText, getByText, user } = setup(
-      <FoodForm onSubmit={onSubmit} />
+      <WrappedForm onSubmit={onSubmit} />
     );
     await user.type(getByLabelText(/Restaurante/i), 'McDonalds');
     await user.type(

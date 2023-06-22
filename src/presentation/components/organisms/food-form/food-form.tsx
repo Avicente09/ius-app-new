@@ -2,16 +2,12 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { Form, FormInputText } from '@presentation/components/molecules';
-import { useForm } from 'react-hook-form';
 
-import { defaultValues } from './food-form.config';
 import type { FoodFormProps } from './food-form.types';
 
-export const FoodForm = ({ onSubmit }: FoodFormProps) => {
-  const { handleSubmit, control } = useForm({ defaultValues });
-
+export const FoodForm = ({ onSubmit, control }: FoodFormProps) => {
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={onSubmit}>
       <Grid container spacing={2}>
         <Grid item xs={12} marginBottom={theme => theme.spacing(4)}>
           <Typography align="center" variant="h6">

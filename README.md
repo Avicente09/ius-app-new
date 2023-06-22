@@ -127,6 +127,7 @@ Also a commit hook was added to set commit message rules, we are using Config Co
 - commitlint-config.cjs
 
 #### Custom Font Families
+
 Two custom font families (Urbani and Nexa) were added to the mui theme. Each one is divided in three sets as follows:
 
 Name: Urbani
@@ -162,29 +163,35 @@ Font Weight: 700
 File: @presentatio/theming/fonts/nexa-bold.woff2
 
 **Note:** Nexa and Urbani make reference to the Regular type of each font.
+
 ##### Priority Order
+
 There were loaded to MUI theme in the following priority order:
+
 1. Urbani
 2. Nexa
 3. Helvetica (as a fallback)
 
 ##### MUI Typography Variants Customization
+
 MUI typography comes with a predefined set of variants which are:
-* h1
-* h2
-* h3
-* h4
-* h5
-* h6
-* subtitle1
-* subtitle2
-* body1
-* body2
-* button
-* caption
-* overline
+
+- h1
+- h2
+- h3
+- h4
+- h5
+- h6
+- subtitle1
+- subtitle2
+- body1
+- body2
+- button
+- caption
+- overline
 
 These variants were modified to use the fonts as follows:
+
 ```bash
 h1: {
     fontFamily: 'Urbani-Bold',
@@ -226,6 +233,7 @@ h1: {
     fontFamily: 'Nexa',
   },
 ```
+
 ##### Usage:
 
 ```bash

@@ -1,4 +1,5 @@
-import type { FieldValues } from 'react-hook-form';
+import type { FormEventHandler } from 'react';
+import type { Control, FieldValues } from 'react-hook-form';
 
 export interface FoodFormFieldValues extends FieldValues {
   restaurant: string;
@@ -10,5 +11,6 @@ export interface FoodFormFieldValues extends FieldValues {
 }
 
 export interface FoodFormProps {
-  onSubmit: (data: FoodFormFieldValues) => void;
+  onSubmit: FormEventHandler<HTMLFormElement>;
+  control: Control<FoodFormFieldValues>;
 }
