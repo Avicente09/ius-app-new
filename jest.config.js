@@ -39,6 +39,8 @@ module.exports = {
     'test',
     'index.ts',
     'config',
+    'fonts.d.ts',
+    'types.d.ts',
     'App.tsx', // TODO: Research if it is a good practice to test App.tsx
   ],
   coverageReporters: ['clover', 'json', 'lcov', 'text'],

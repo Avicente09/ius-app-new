@@ -61,7 +61,7 @@ type ProviderFactoryParams = {
   getValues: UseFormGetValues<FoodFormFieldValues>;
 };
 
-function providerFactory({
+export function providerFactory({
   order,
   save,
   getValues,

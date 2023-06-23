@@ -1,6 +1,6 @@
 import type { UseCase } from '@domain/entities';
 import { AppError } from '@domain/error-definition';
-import { useMemoFromObjectDeps } from '@utils/hook/use-memo-from-object-deps';
+import { useCallbackFromObjectDeps } from '@utils/hook/use-callback-from-object-deps';
 import { useCallback, useReducer } from 'react';
 
 import type {
@@ -33,7 +33,7 @@ export function createInvokeBusinessHook<
   return factoryParams => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const actualProvider = useMemoFromObjectDeps(
+    const getProvider = useCallbackFromObjectDeps(
       () => (provider instanceof Function ? provider(factoryParams) : provider),
       factoryParams
     );
@@ -41,13 +41,13 @@ export function createInvokeBusinessHook<
     const invoke = useCallback(
       (input: TInput) => {
         dispatch({ status: 'loading' });
-        useCase(actualProvider, input)
+        useCase(getProvider(), input)
           .then(output => dispatch({ status: 'success', data: output }))
           .catch(e =>
             dispatch({ status: 'error', errors: [AppError.assert(e)] })
           );
       },
-      [actualProvider]
+      [getProvider]
     );
 
     return { invoke, state };

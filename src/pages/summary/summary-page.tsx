@@ -10,13 +10,11 @@ function Page(): JSX.Element {
   const navigate = useNavigate();
 
   const goHome = () => navigate('/home');
-  const onRemoveTask = (taskId: EntityId) => {
+  const onRemoveTask = (_taskId: EntityId) => {
     //TODO: Remove task from current order
-    console.log('Remove Task -> ', taskId);
   };
   const placeOrder = () => {
     //TODO: Place current order on the server
-    console.log('Place Order');
   };
 
   return (

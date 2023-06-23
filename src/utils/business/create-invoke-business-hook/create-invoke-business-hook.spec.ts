@@ -1,4 +1,4 @@
-import { renderHook } from '../../../../test/test-utils';
+import { act, renderHook } from '../../../../test/test-utils';
 import { createInvokeBusinessHook } from './create-invoke-business-hook';
 
 describe('utils:business:create-invoke-business-hook', () => {
@@ -32,6 +32,34 @@ describe('utils:business:create-invoke-business-hook', () => {
       status: 'idle',
       errors: [],
     });
+    expect(mockProviderFactory).not.toHaveBeenCalledWith(
+      mockProviderFactoryParams
+    );
+  });
+
+  test('Create render and invoke hook using a factory provider', async () => {
+    expect.assertions(3);
+
+    const mockUseCase = jest.fn().mockImplementation(() => Promise.resolve());
+    const mockProviderFactory = jest.fn(_ => jest.fn());
+    const wrapMockProvider = (params: any) => mockProviderFactory(params);
+    const mockProviderFactoryParams = { foo: 'bar' };
+
+    const hook = createInvokeBusinessHook(mockUseCase, wrapMockProvider);
+    const { result } = renderHook(() => hook(mockProviderFactoryParams as any));
+
+    expect(result.current.state).toEqual({
+      status: 'idle',
+      errors: [],
+    });
+    expect(mockProviderFactory).not.toHaveBeenCalledWith(
+      mockProviderFactoryParams
+    );
+
+    await act(() => {
+      result.current.invoke({});
+    });
+
     expect(mockProviderFactory).toHaveBeenCalledWith(mockProviderFactoryParams);
   });
 
