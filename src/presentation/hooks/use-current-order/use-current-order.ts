@@ -14,7 +14,7 @@ export function useCurrentOrder() {
     errors,
   } = useLoadableFromLocalStorage({
     key: CURRENT_ORDER_KEY,
-    initialData: contextOrder,
+    initialData: contextOrder ?? undefined,
   });
 
   const save = useCallback(

@@ -8,17 +8,25 @@ export function withAuth<TProps extends JSX.IntrinsicAttributes>(
   Component: ComponentType<TProps>,
   options?: WithAuthProps
 ): FC<TProps> {
-  const { loginPath = '/login' } = options || {};
+  const {
+    loginPath = '/login',
+    homePath = '/home',
+    isLoginPage = false,
+  } = options || {};
 
   return (props: TProps): JSX.Element => {
-    const { user, isLoading } = useAuth();
+    const { user, status } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
-      if (!user && !isLoading) {
-        navigate(loginPath);
+      if (status === 'ready') {
+        if (isLoginPage && user) {
+          navigate(homePath);
+        } else if (!isLoginPage && !user) {
+          navigate(loginPath);
+        }
       }
-    }, [user, isLoading, navigate]);
+    }, [user, status, navigate]);
 
     return <Component {...props} />;
   };

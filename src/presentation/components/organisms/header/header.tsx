@@ -13,8 +13,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import styled from '@mui/system/styled';
 import { useAuth } from '@presentation/hooks/use-auth';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
@@ -22,8 +21,7 @@ const StyledToolbar = styled(Toolbar)({
 });
 
 export const Header = () => {
-  const { logout, user, isLoading } = useAuth();
-  const navigate = useNavigate();
+  const { logout } = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -37,12 +35,6 @@ export const Header = () => {
   const handleLogout = () => {
     logout();
   };
-
-  useEffect(() => {
-    if (!user && !isLoading) {
-      navigate('/login');
-    }
-  }, [user, isLoading, navigate]);
 
   return (
     <AppBar position="static">

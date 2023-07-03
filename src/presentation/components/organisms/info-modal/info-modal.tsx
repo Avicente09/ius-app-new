@@ -13,15 +13,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import type { ReactNode } from 'react';
 
-import { type ModalProps, ModalType } from './info-modal.types';
-
-const headerStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '100%',
-  height: 100,
-};
+import type { ModalProps, ModalType } from './info-modal.types';
 
 const modalHeader = (modalType: ModalType): ReactNode => {
   let background: string | undefined;
@@ -29,31 +21,31 @@ const modalHeader = (modalType: ModalType): ReactNode => {
   let headerIcon: ReactNode;
 
   switch (modalType) {
-    case ModalType.Success:
+    case 'success':
       background = 'success.main';
       headerText = 'CORRECTO';
       headerIcon = (
         <CheckCircleOutlineIcon fontSize="large" sx={{ color: 'white' }} />
       );
       break;
-    case ModalType.Warning:
+    case 'warning':
       background = 'warning.main';
       headerText = 'ALERTA';
       headerIcon = (
         <WarningAmberIcon fontSize="large" sx={{ color: 'white' }} />
       );
       break;
-    case ModalType.Error:
+    case 'error':
       background = 'error.main';
       headerText = 'ERROR';
       headerIcon = <DangerousIcon fontSize="large" sx={{ color: 'white' }} />;
       break;
-    case ModalType.Info:
+    case 'info':
       background = 'info.main';
       headerText = 'INFORMACION';
       headerIcon = <FeedIcon fontSize="large" sx={{ color: 'white' }} />;
       break;
-    case ModalType.Neutro:
+    case 'neutral':
       background = 'text.disabled';
       headerText = 'AVISO IMPORTANTE';
       headerIcon = <FeedIcon fontSize="large" sx={{ color: 'white' }} />;
@@ -61,7 +53,16 @@ const modalHeader = (modalType: ModalType): ReactNode => {
   }
 
   return (
-    <Box sx={headerStyle} bgcolor={background}>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: 100,
+      }}
+      bgcolor={background}
+    >
       <Grid container spacing={2}>
         <Grid item xs={2} container display="flex" justifyContent="center">
           {headerIcon}

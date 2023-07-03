@@ -1,6 +1,5 @@
 import { render } from '../../../../../test/test-utils';
 import { InfoModal } from './info-modal';
-import { ModalType } from './info-modal.types';
 
 describe('presentation:components:organisms:info-modal', () => {
   test('It should render without crashing', () => {
@@ -10,20 +9,20 @@ describe('presentation:components:organisms:info-modal', () => {
           onClose={jest.fn}
           open={true}
           title="Some title"
-          type={ModalType.Info}
+          type={'info'}
           messages={['Some message in modal']}
         />
       )
     ).not.toThrow();
   });
 
-  test('It should render a ModalType.Success and match the header text', () => {
+  test('It should render a success and match the header text', () => {
     const { getByText } = render(
       <InfoModal
         onClose={jest.fn}
         open={true}
         title="Some title"
-        type={ModalType.Success}
+        type={'success'}
         messages={['Some message in modal']}
       />
     );
@@ -31,13 +30,13 @@ describe('presentation:components:organisms:info-modal', () => {
     expect(getByText('CORRECTO')).toBeInTheDocument();
   });
 
-  test('It should render a ModalType.Warning and match the header text', () => {
+  test('It should render a warning and match the header text', () => {
     const { getByText } = render(
       <InfoModal
         onClose={jest.fn}
         open={true}
         title="Some title"
-        type={ModalType.Warning}
+        type={'warning'}
         messages={['Some message in modal']}
       />
     );
@@ -45,13 +44,13 @@ describe('presentation:components:organisms:info-modal', () => {
     expect(getByText('ALERTA')).toBeInTheDocument();
   });
 
-  test('It should render a ModalType.Error and match the header text', () => {
+  test('It should render a error and match the header text', () => {
     const { getByText } = render(
       <InfoModal
         onClose={jest.fn}
         open={true}
         title="Some title"
-        type={ModalType.Error}
+        type={'error'}
         messages={['Some message in modal']}
       />
     );
@@ -59,13 +58,13 @@ describe('presentation:components:organisms:info-modal', () => {
     expect(getByText('ERROR')).toBeInTheDocument();
   });
 
-  test('It should render a ModalType.Info and match the header text', () => {
+  test('It should render a info and match the header text', () => {
     const { getByText } = render(
       <InfoModal
         onClose={jest.fn}
         open={true}
         title="Some title"
-        type={ModalType.Info}
+        type={'info'}
         messages={['Some message in modal']}
       />
     );
@@ -73,13 +72,13 @@ describe('presentation:components:organisms:info-modal', () => {
     expect(getByText('INFORMACION')).toBeInTheDocument();
   });
 
-  test('It should render a ModalType.Neutro and match the header text', () => {
+  test('It should render a neutral and match the header text', () => {
     const { getByText } = render(
       <InfoModal
         onClose={jest.fn}
         open={true}
         title="Some title"
-        type={ModalType.Neutro}
+        type={'neutral'}
         messages={['Some message in modal']}
       />
     );
@@ -87,5 +86,5 @@ describe('presentation:components:organisms:info-modal', () => {
     expect(getByText('AVISO IMPORTANTE')).toBeInTheDocument();
   });
 
-  //TODO: Add more test to coverage all modal types
+  //TODO: Add more test to coverage all modal scenarios
 });

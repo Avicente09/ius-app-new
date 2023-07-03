@@ -54,7 +54,7 @@ function App() {
       <React.StrictMode>
         <AppThemeProvider theme={iUSTheme}>
           <BrowserRouter>
-            <AuthProvider value={null}>
+            <AuthProvider>
               <OrderProvider>
                 <Routes>
                   {routes.map(({ index, path, page: Page }) => (

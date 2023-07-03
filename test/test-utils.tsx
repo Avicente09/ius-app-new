@@ -6,6 +6,7 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
+import { AuthProvider } from '../src/presentation/context/auth';
 import { OrderProvider } from '../src/presentation/context/order';
 import { iUSTheme } from '../src/presentation/theming';
 
@@ -37,7 +38,9 @@ function setup(jsx: React.ReactElement | JSX.Element) {
 export function PageProviders({ children }: PropsWithChildren) {
   return (
     <BaseProviders>
-      <OrderProvider>{children}</OrderProvider>
+      <AuthProvider>
+        <OrderProvider>{children}</OrderProvider>
+      </AuthProvider>
     </BaseProviders>
   );
 }

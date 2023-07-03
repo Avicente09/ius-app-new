@@ -6,10 +6,12 @@ export type ModalProps = {
   onClose: () => void;
 };
 
-export enum ModalType {
-  Success,
-  Warning,
-  Error,
-  Info,
-  Neutro,
-}
+export const MODAL_TYPES = [
+  'success',
+  'warning',
+  'error',
+  'info',
+  'neutral',
+] as const;
+
+export type ModalType = typeof MODAL_TYPES[number];

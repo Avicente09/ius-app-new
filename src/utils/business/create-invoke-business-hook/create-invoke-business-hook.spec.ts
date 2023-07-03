@@ -17,7 +17,7 @@ describe('utils:business:create-invoke-business-hook', () => {
     });
   });
 
-  test('Create and render hook using a factory provider', () => {
+  test('Create and render the hook using a factory provider', () => {
     expect.assertions(2);
 
     const mockUseCase = jest.fn();
@@ -37,7 +37,7 @@ describe('utils:business:create-invoke-business-hook', () => {
     );
   });
 
-  test('Create render and invoke hook using a factory provider', async () => {
+  test('Create, render and invoke the hook using a factory provider', async () => {
     expect.assertions(3);
 
     const mockUseCase = jest.fn().mockImplementation(() => Promise.resolve());
@@ -52,9 +52,7 @@ describe('utils:business:create-invoke-business-hook', () => {
       status: 'idle',
       errors: [],
     });
-    expect(mockProviderFactory).not.toHaveBeenCalledWith(
-      mockProviderFactoryParams
-    );
+    expect(mockProviderFactory).not.toHaveBeenCalled();
 
     await act(() => {
       result.current.invoke({});
@@ -63,5 +61,52 @@ describe('utils:business:create-invoke-business-hook', () => {
     expect(mockProviderFactory).toHaveBeenCalledWith(mockProviderFactoryParams);
   });
 
-  // TODO: Add tests for the invoke function and complete coverage
+  test('Create, render and invoke the hook using a fixed provider', async () => {
+    expect.assertions(2);
+
+    const mockUseCase = jest.fn().mockImplementation(() => Promise.resolve());
+    const mockProvider = { foo: 'bar' };
+
+    const hook = createInvokeBusinessHook(mockUseCase, mockProvider);
+    const { result } = renderHook(() => hook());
+
+    expect(result.current.state).toEqual({
+      status: 'idle',
+      errors: [],
+    });
+
+    await act(() => {
+      result.current.invoke('some-param');
+    });
+
+    expect(mockUseCase).toHaveBeenCalledWith(mockProvider, 'some-param');
+  });
+
+  test('Create, render and invoke a failing hook', async () => {
+    expect.assertions(3);
+    const mockUseCase = jest
+      .fn()
+      .mockImplementation(() => Promise.reject(new Error('some-error')));
+    const mockProvider = { foo: 'bar' };
+
+    const hook = createInvokeBusinessHook(mockUseCase, mockProvider);
+    const { result } = renderHook(() => hook());
+
+    expect(result.current.state).toEqual({
+      status: 'idle',
+      errors: [],
+    });
+
+    await act(() => {
+      result.current.invoke('some-param');
+    });
+
+    expect(mockUseCase).toHaveBeenCalledWith(mockProvider, 'some-param');
+    expect(result.current.state).toStrictEqual({
+      status: 'error',
+      errors: expect.any(Array),
+    });
+  });
+
+  // TODO: Add tests for complex scenarios
 });

@@ -1,28 +1,32 @@
-import type { Order } from '@domain/entities';
+import { renderPage, setupPage, waitFor } from '../../../test/test-utils';
+import { FoodPage } from './food-page';
 
-import { renderPage } from '../../../test/test-utils';
-import { FoodPage, providerFactory } from './food-page';
+const mockNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
 
 describe('pages:food', () => {
   test('It should render without crashing', () => {
     expect(() => renderPage(<FoodPage />)).not.toThrow();
   });
 
-  test('It should create a provider manually and match the structure', () => {
-    const order = { id: '1' } as Order;
-    const save = jest.fn();
-    const getValues = jest.fn().mockReturnValue({});
+  test('It should fill the form, submit it and navigate to the summary page', async () => {
+    expect.hasAssertions();
 
-    const provider = providerFactory({ order, save, getValues });
-
-    expect(provider).toStrictEqual({
-      getExistingDraftOrder: expect.any(Function),
-      createNewDraftOrder: expect.any(Function),
-      saveOrder: expect.any(Function),
-      getPickUpTask: expect.any(Function),
-      getDeliveryTask: expect.any(Function),
+    const { getByLabelText, getByText, user } = setupPage(<FoodPage />);
+    await user.type(getByLabelText(/Restaurante/i), 'McDonalds');
+    await user.type(
+      getByLabelText(/Detalle de Menú o Combo y Cantidad/i),
+      'Combo Big Mac'
+    );
+    await user.type(getByLabelText(/Ubicación de entrega/i), 'Calle 123');
+    await user.click(getByText(/Agregar a la Orden/i));
+    await waitFor(() => {
+      expect(mockNavigate).toBeCalledWith('/summary');
     });
-  });
 
-  // TODO: Actually test the page behavior
+    //TODO: Add assertion to check the result values in the context
+  });
 });

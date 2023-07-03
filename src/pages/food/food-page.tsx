@@ -56,12 +56,12 @@ attachFoodDeliveryTasks(order, save, formFields)
  */
 
 type ProviderFactoryParams = {
-  order: Order | undefined | null;
+  order: Order | undefined;
   save: (order: Order) => void;
   getValues: UseFormGetValues<FoodFormFieldValues>;
 };
 
-export function providerFactory({
+function providerFactory({
   order,
   save,
   getValues,
@@ -69,7 +69,7 @@ export function providerFactory({
   const formFields = getValues();
 
   return {
-    getExistingDraftOrder: always(Promise.resolve(order ?? undefined)),
+    getExistingDraftOrder: always(Promise.resolve(order)),
     createNewDraftOrder: createDraftOrder,
     saveOrder: setOrderWithSyncSetterFactory({
       orderSetter: save,

@@ -1,14 +1,39 @@
-import { render } from '../../../test/test-utils';
+import { renderPage, setupPage } from '../../../test/test-utils';
 import { LoginPage } from './login-page';
 
-//TODO: Implement dynamic mocks in order to test the login page on multiple scenarios
+function MockGoogleLoginError(props: { onSuccess: (response: any) => void }) {
+  return (
+    <button onClick={() => props.onSuccess({})}>Acceder con Google</button>
+  );
+}
+
 jest.mock('@greatsumini/react-facebook-login');
-jest.mock('@react-oauth/google');
+jest.mock('@react-oauth/google', () => ({
+  GoogleLogin: MockGoogleLoginError,
+}));
 
 describe('pages:login', () => {
-  test('It should render without crashing', () => {
-    expect(() => render(<LoginPage />)).not.toThrow();
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  // TODO: Actually test the page behavior
+  test('It should render without crashing', () => {
+    expect(() => renderPage(<LoginPage />)).not.toThrow();
+  });
+
+  test('It should call the onError callback using the MockGoogleLoginError component. The modal has to be shown.', async () => {
+    expect.assertions(1);
+    const { user, getByText } = setupPage(<LoginPage />);
+    await user.click(getByText('Acceder con Google'));
+
+    expect(getByText('Lo sentimos, algo salió mal')).toBeInTheDocument();
+  });
+
+  test('It should call the onInfo callback to show the disclaimer linked button. The modal has to be shown.', async () => {
+    expect.assertions(1);
+    const { user, getByText } = setupPage(<LoginPage />);
+    await user.click(getByText('Aviso Importante'));
+
+    expect(getByText('Aviso Importante para los Usuarios')).toBeInTheDocument();
+  });
 });

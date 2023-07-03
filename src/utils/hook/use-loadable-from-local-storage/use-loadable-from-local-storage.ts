@@ -28,6 +28,7 @@ export function useLoadableFromLocalStorage<TData>({
   }, [dispatch, key, state.status]);
 
   const clear = useCallback(() => {
+    dispatch({ status: 'loading' });
     localStorage.removeItem(key);
     dispatch({
       reset: {
