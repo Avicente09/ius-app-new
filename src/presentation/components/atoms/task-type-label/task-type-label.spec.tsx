@@ -15,4 +15,6 @@ describe('presentation:components:atoms:task-status-label', () => {
     const { getByText } = render(<TaskTypeLabel type="deliver" />);
     expect(getByText('ENTREGAR')).toBeInTheDocument();
   });
+
+  //TODO: add test for paymentRetrieval type task
 });

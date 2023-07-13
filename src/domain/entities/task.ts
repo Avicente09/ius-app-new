@@ -2,8 +2,11 @@ import type { EntityId } from './entity';
 import type { GpsLocation } from './gps-location';
 import type { GtAddress } from './gt-address';
 
-export const TASK_TYPES = ['pickUp', 'deliver'] as const;
+export const TASK_TYPES = ['pickUp', 'deliver', 'paymentRetrieval'] as const;
 export type TaskType = typeof TASK_TYPES[number];
+
+export const LOCATIONLESS_TASK_TYPES = ['paymentRetrieval'] as const;
+export type LocationlessTaskType = typeof LOCATIONLESS_TASK_TYPES[number];
 
 export const TASK_STATUSES = ['pending', 'done'] as const;
 export type TaskStatus = typeof TASK_STATUSES[number];
@@ -31,4 +34,13 @@ export interface TaskByGtAddress {
   dependencies?: EntityId[];
 }
 
-export type Task = TaskByGpsLocation | TaskByGtAddress;
+export interface TaskLocationless {
+  id: EntityId;
+  type: LocationlessTaskType;
+  status: TaskStatus;
+  instruction: string;
+  details?: Record<TaskDetail, 'string'>;
+  dependencies?: EntityId[];
+}
+
+export type Task = TaskByGpsLocation | TaskByGtAddress | TaskLocationless;

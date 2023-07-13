@@ -76,7 +76,7 @@ describe('domain:entities', () => {
   });
 
   test('It should verify the TASK_TYPES', () => {
-    expect(TASK_TYPES).toStrictEqual(['pickUp', 'deliver']);
+    expect(TASK_TYPES).toStrictEqual(['pickUp', 'deliver', 'paymentRetrieval']);
   });
 
   test('It should verify the TRIP_STATUSES', () => {

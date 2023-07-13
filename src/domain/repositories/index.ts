@@ -1,3 +1,4 @@
+export * from './attach-delivery-tasks-with-payment-retrieval-repository';
 export * from './attach-food-delivery-tasks-repository';
 export * from './get-draft-order-repository';
 export * from './get-optional-order-repository';

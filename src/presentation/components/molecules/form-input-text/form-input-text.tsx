@@ -39,6 +39,7 @@ export function FormInputText<TFieldValues extends FieldValues>({
             InputLabelProps={{
               shrink: true,
             }}
+            fullWidth
           />
         )}
       />

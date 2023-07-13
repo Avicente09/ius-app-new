@@ -5,6 +5,7 @@ import type { TaskTypeLabelProps } from './task-type-label.types';
 const typeLabels = {
   pickUp: 'RECOGER',
   deliver: 'ENTREGAR',
+  paymentRetrieval: 'ENTREGA DE PAGO',
 } as const;
 
 export function TaskTypeLabel({ type }: TaskTypeLabelProps): JSX.Element {
