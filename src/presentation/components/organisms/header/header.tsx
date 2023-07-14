@@ -1,7 +1,5 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import AdbIcon from '@mui/icons-material/Adb';
-import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import { AppBar } from '@mui/material';
 import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
@@ -9,74 +7,65 @@ import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import styled from '@mui/system/styled';
 import { useAuth } from '@presentation/hooks/use-auth';
+import { useCurrentOrder } from '@presentation/hooks/use-current-order';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
-  justifyContent: 'space-between',
 });
 
 export const Header = () => {
   const { logout } = useAuth();
+  const { order } = useCurrentOrder();
+  const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+
+  const handleProfileClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const handleLogout = () => {
-    logout();
+  const handleShoppingCartClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    handleClose();
+    navigate('/summary');
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" data-testid="app-bar">
       <Container maxWidth="xl">
         <StyledToolbar disableGutters>
-          <Box sx={{ display: 'flex' }}>
-            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' } }} />
-            <MenuIcon sx={{ display: { xs: 'flex', md: 'none' } }} />
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              LOGO
-            </Typography>
-          </Box>
-          <Box>
-            <Badge badgeContent={4} color="error">
-              <NotificationsIcon color="action" />
-            </Badge>
+          <Box ml="auto">
             <IconButton
               size="large"
               color="inherit"
-              id="basic-button"
+              onClick={handleShoppingCartClick}
+              data-testid="shopping-cart-button"
+            >
+              <Badge badgeContent={order?.tasks.length} color="error">
+                <ShoppingCart color="secondary" />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              color="inherit"
               aria-controls={open ? 'basic-menu' : undefined}
               aria-haspopup="true"
               aria-expanded={open ? 'true' : undefined}
-              onClick={handleClick}
+              onClick={handleProfileClick}
+              data-testid="profile-button"
             >
               <AccountCircleIcon />
             </IconButton>
             <Menu
-              id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
                 vertical: 'top',
@@ -91,7 +80,7 @@ export const Header = () => {
               onClose={handleClose}
             >
               <MenuItem>Perfil</MenuItem>
-              <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
+              <MenuItem onClick={logout}>Cerrar Sesión</MenuItem>
             </Menu>
           </Box>
         </StyledToolbar>

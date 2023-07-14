@@ -91,5 +91,26 @@ describe('storage:save-object', () => {
     });
   });
 
+  test('It should render the hook with ready state and an existing value', () => {
+    expect.assertions(1);
+
+    mockGetItem.mockReturnValue(JSON.stringify({ foo: 'bar' }));
+
+    const { result } = renderHook(() =>
+      useLoadableFromLocalStorage({
+        initialData: undefined,
+        key: 'foo',
+      })
+    );
+
+    expect(result.current).toEqual({
+      status: 'ready',
+      errors: [],
+      data: { foo: 'bar' },
+      clear: expect.any(Function),
+      set: expect.any(Function),
+    });
+  });
+
   // TODO: Add tests for clear and set functions to complete the coverage
 });

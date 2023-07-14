@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 import { MainMenuOptionButton } from '../../molecules';
 
@@ -38,10 +39,7 @@ const StyledMainContainer = styled(Box)(
 );
 
 export function MainMenu(): JSX.Element {
-  const navigateTo = (path: string) => {
-    //TODO: Navigate to path
-    console.log('========== Navigate to: ', path);
-  };
+  const navigate = useNavigate();
 
   return (
     <StyledMainContainer>
@@ -49,7 +47,7 @@ export function MainMenu(): JSX.Element {
         <MainMenuOptionButton
           key={`menu-option-${index}`}
           text={option.text}
-          onClick={() => navigateTo(option.path)}
+          onClick={() => navigate(option.path)}
         />
       ))}
     </StyledMainContainer>

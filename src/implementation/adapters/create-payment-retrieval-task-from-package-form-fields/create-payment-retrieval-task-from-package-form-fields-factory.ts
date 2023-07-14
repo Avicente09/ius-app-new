@@ -22,11 +22,6 @@ export function createPaymentRetrievalTaskFromPackageFormFieldsFactory({
           'Enviar foto de boleta de depósito o comprobante equivalente que muestre el cliente';
         break;
       }
-      default: {
-        instructions =
-          'Enviar foto de boleta de depósito o comprobante equivalente que muestre el cliente';
-        break;
-      }
     }
     const paymentRetrievalTask: Task = {
       // TODO: generate unique id according to task type

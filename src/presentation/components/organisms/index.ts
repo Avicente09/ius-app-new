@@ -5,7 +5,6 @@ export * from './info-modal';
 export * from './little-errands-form';
 export * from './login-panel';
 export * from './main-menu';
-export * from './navbar';
 export * from './order-view';
 export * from './package-form';
 export * from './purchase-form';

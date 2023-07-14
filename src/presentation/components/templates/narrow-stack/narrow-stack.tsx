@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
+import { Header } from '../../organisms';
 import type { NarrowStackProps } from './narrow-stack.types';
 
 export function NarrowStack({
@@ -8,43 +9,46 @@ export function NarrowStack({
   children,
 }: NarrowStackProps): JSX.Element {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        width: '100%',
-        height: '100%',
-        backgroundImage: 'url("assets/images/ius-text.svg")',
-        backgroundRepeat: 'repeat',
-      }}
-    >
+    <>
+      <Header />
       <Box
         sx={{
-          maxWidth: '900px',
-          ml: 'auto',
-          mr: 'auto',
+          display: 'flex',
+          width: '100%',
+          height: '100%',
+          backgroundImage: 'url("assets/images/ius-text.svg")',
+          backgroundRepeat: 'repeat',
         }}
       >
         <Box
-          sx={theme => ({
-            m: theme.spacing(9, 0),
-            display: 'flex',
-            justifyContent: 'center',
-            alignContent: 'center',
-            backgroundColor: '#fff',
-            borderRadius: theme.borderRadius.large,
-            border: `8px solid ${theme.palette.secondary.main}`,
-          })}
+          sx={{
+            maxWidth: '900px',
+            ml: 'auto',
+            mr: 'auto',
+          }}
         >
-          <Typography
-            variant="h2"
-            fontWeight="bold"
-            color={theme => theme.palette.primary.main}
+          <Box
+            sx={theme => ({
+              m: theme.spacing(9, 0),
+              display: 'flex',
+              justifyContent: 'center',
+              alignContent: 'center',
+              backgroundColor: '#fff',
+              borderRadius: theme.borderRadius.large,
+              border: `8px solid ${theme.palette.secondary.main}`,
+            })}
           >
-            {title}
-          </Typography>
+            <Typography
+              variant="h2"
+              fontWeight="bold"
+              color={theme => theme.palette.primary.main}
+            >
+              {title}
+            </Typography>
+          </Box>
+          {children}
         </Box>
-        {children}
       </Box>
-    </Box>
+    </>
   );
 }

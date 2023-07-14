@@ -1,6 +1,11 @@
 import { GT_PLACES } from './gt-address';
 import { ORDER_STATUSES } from './order';
-import { TASK_DETAILS, TASK_STATUSES, TASK_TYPES } from './task';
+import {
+  LOCATIONLESS_TASK_TYPES,
+  TASK_DETAILS,
+  TASK_STATUSES,
+  TASK_TYPES,
+} from './task';
 import { TRIP_STATUSES } from './trip';
 
 describe('domain:entities', () => {
@@ -87,5 +92,9 @@ describe('domain:entities', () => {
       'cancelled',
       'rejected',
     ]);
+  });
+
+  test('It should verify the LOCATIONLESS_TASK_TYPES', () => {
+    expect(LOCATIONLESS_TASK_TYPES).toStrictEqual(['paymentRetrieval']);
   });
 });
