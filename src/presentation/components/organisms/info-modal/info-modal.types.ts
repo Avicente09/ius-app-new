@@ -4,6 +4,7 @@ export type ModalProps = {
   messages?: Array<string>;
   open?: boolean;
   onClose: () => void;
+  onAccept?: () => void;
 };
 
 export const MODAL_TYPES = [

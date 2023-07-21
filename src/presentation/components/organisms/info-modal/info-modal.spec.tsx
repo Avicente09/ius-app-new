@@ -1,7 +1,8 @@
 import { render } from '../../../../../test/test-utils';
 import { InfoModal } from './info-modal';
+import { MODAL_TYPES } from './info-modal.types';
 
-describe('presentation:components:organisms:info-modal', () => {
+describe('presentation:components:organisms:info-modal:control', () => {
   test('It should render without crashing', () => {
     expect(() =>
       render(
@@ -84,6 +85,16 @@ describe('presentation:components:organisms:info-modal', () => {
     );
 
     expect(getByText('AVISO IMPORTANTE')).toBeInTheDocument();
+  });
+
+  test('It should mantch the MODAL_TYPES', () => {
+    expect(MODAL_TYPES).toStrictEqual([
+      'success',
+      'warning',
+      'error',
+      'info',
+      'neutral',
+    ]);
   });
 
   //TODO: Add more test to coverage all modal scenarios

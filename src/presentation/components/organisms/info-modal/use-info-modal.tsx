@@ -11,7 +11,10 @@ const defaultInitialState: InfoModalState = {
   messages: [],
 };
 
-export const useInfoModal = (initialState?: Partial<InfoModalState>) => {
+export const useInfoModal = (
+  initialState?: Partial<InfoModalState>,
+  onAccept?: () => void
+) => {
   const [state, dispatch] = useObjectReducer<InfoModalState>({
     ...defaultInitialState,
     ...initialState,
@@ -29,6 +32,7 @@ export const useInfoModal = (initialState?: Partial<InfoModalState>) => {
       title={state.title}
       messages={state.messages}
       onClose={handleClose}
+      onAccept={onAccept}
     />
   );
 

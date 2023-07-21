@@ -83,6 +83,7 @@ export const InfoModal = ({
   messages,
   open,
   onClose,
+  onAccept,
 }: ModalProps) => {
   const multipleMessages = (): ReactNode => {
     if (messages && messages.length > 0) {
@@ -96,6 +97,12 @@ export const InfoModal = ({
       return <div></div>;
     }
   };
+
+  const handleAccept = () => {
+    onAccept && onAccept();
+    onClose();
+  };
+
   return (
     <Dialog
       open={open!}
@@ -108,7 +115,7 @@ export const InfoModal = ({
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent dividers>{multipleMessages()}</DialogContent>
       <DialogActions>
-        <Button variant="contained" color="success" onClick={onClose}>
+        <Button variant="contained" color="success" onClick={handleAccept}>
           Aceptar
         </Button>
       </DialogActions>

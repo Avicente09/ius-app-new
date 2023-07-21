@@ -27,6 +27,8 @@ module.exports = {
   moduleNameMapper: {
     '^@presentation/theming/fonts/(.*)\\.woff2$':
       '<rootDir>/__mocks__/fontMock.js',
+    '@tomtom-international/web-sdk-maps/dist/maps.css':
+      '<rootDir>/__mocks__/cssMock.js',
     '@config/(.*)': '<rootDir>/src/config/$1',
     '@domain/(.*)': '<rootDir>/src/domain/$1',
     '@implementation/(.*)': '<rootDir>/src/implementation/$1',

@@ -3,12 +3,19 @@ import { useForm } from 'react-hook-form';
 
 import { render, screen, setup, waitFor } from '../../../../../test/test-utils';
 import { FormInputText } from './form-input-text';
+import { FormInputType } from './form-input-text.types';
 
 const defaultValues: FieldValues = {
   testInput: '',
 };
 
-const TestWrapComponent = () => {
+interface TestWrapComponentProps {
+  type?: FormInputType;
+}
+
+const TestWrapComponent = ({
+  type = FormInputType.Text,
+}: TestWrapComponentProps) => {
   const { control } = useForm({
     defaultValues,
   });
@@ -19,6 +26,7 @@ const TestWrapComponent = () => {
       label="Test Input Label"
       fControl={control}
       placeholder="Test Input Here"
+      type={type}
       validations={{
         required: true,
         customErrorMsg: 'El campo es requerido',
