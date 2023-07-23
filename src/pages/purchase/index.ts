@@ -1,4 +1,3 @@
-// TODO: Rename the file to follow page naming convention
-import { PurchasePage } from './purchase-form';
+import { PurchasePage } from './purchase-page';
 
 export default PurchasePage;
