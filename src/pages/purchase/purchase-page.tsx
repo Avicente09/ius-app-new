@@ -1,5 +1,6 @@
 import type { Order } from '@domain/entities';
-import type { AttachPurchaseDeliveryTasksRepository } from '@domain/repositories';
+import type { AttachSimpleDeliveryTasksRepository } from '@domain/repositories';
+
 import { attachSimpleDeliveryTasksUC } from '@domain/use-cases/attach-simple-delivery-tasks';
 import { createDeliveryTaskFromPurchaseFormFieldsFactory } from '@implementation/adapters/create-delivery-task-from-purchase-form-fields';
 import { createDraftOrder } from '@implementation/adapters/create-draft-order';
@@ -29,7 +30,8 @@ function providerFactory({
   order,
   save,
   getValues,
-}: ProviderFactoryParams): AttachPurchaseDeliveryTasksRepository {
+}: ProviderFactoryParams): AttachSimpleDeliveryTasksRepository {
+
   const formFields = getValues();
 
   return {

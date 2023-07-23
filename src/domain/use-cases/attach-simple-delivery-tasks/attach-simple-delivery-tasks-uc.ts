@@ -1,9 +1,9 @@
 import type { Order } from '@domain/entities';
 import { AppError } from '@domain/error-definition';
-import type { AttachPurchaseDeliveryTasksRepository } from '@domain/repositories';
+import type { AttachSimpleDeliveryTasksRepository } from '@domain/repositories';
 
 export function attachSimpleDeliveryTasksUC(
-  provider: AttachPurchaseDeliveryTasksRepository
+  provider: AttachSimpleDeliveryTasksRepository
 ): Promise<Order> {
   const {
     getExistingDraftOrder,
