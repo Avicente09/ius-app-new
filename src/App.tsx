@@ -42,6 +42,11 @@ const routes = [
     path: '/summary',
     page: lazy(() => import('./pages/summary')),
   },
+  {
+    index: false,
+    path: '/profile',
+    page: lazy(() => import('./pages/profile')),
+  },
 ];
 
 function Loading() {
