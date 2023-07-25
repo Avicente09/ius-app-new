@@ -2,8 +2,8 @@ export const notifications = {
   termsAndConditions: {
     title: 'Terminos y Condiciones',
     messages: [
-      'Somos una empresa totalmente independiente de cualquier lugar, por lo que no podemos regresar ningún producto salido de tienda, por lo que pedimos que su pedido sea 100% seguro para que podamos seguir brindando este servicio, confiable, seguro y con el beneficio de pago contra entrega.',
-      'Si luego de leer nuestra única condición y desea solicitar nuestro servicio presione aceptar',
+      'Nuestra empresa es una entidad completamente independiente de cualquier otro comercio o tienda. Por lo tanto, no podemos aceptar devoluciones de productos adquiridos en tiendas externas. Al realizar una compra a través de nuestra aplicación, el usuario acepta esta condición y es responsable de asegurarse de que su pedido sea preciso y completo.',
+      'Si estás de acuerdo con nuestra única condición, solo debes aceptar para disfrutar de nuestro servicio.',
     ],
   },
 };
