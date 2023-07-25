@@ -1,4 +1,3 @@
-// TODO: Rename the file to follow page naming convention
-import { LittleErrandsPage } from './little-errands-form';
+import { LittleErrandsPage } from './little-errands-page';
 
 export default LittleErrandsPage;

@@ -1,14 +1,14 @@
 import type { Order } from '@domain/entities';
 import type { AttachSimpleDeliveryTasksRepository } from '@domain/repositories';
 import { attachSimpleDeliveryTasksUC } from '@domain/use-cases/attach-simple-delivery-tasks';
-import { createDeliveryTaskFromPurchaseFormFieldsFactory } from '@implementation/adapters/create-delivery-task-from-purchase-form-fields';
+import { createDeliveryTaskFromLittleErrandsFormFieldsFactory } from '@implementation/adapters/create-delivery-task-from-little-errands-form-fields';
 import { createDraftOrder } from '@implementation/adapters/create-draft-order';
-import { createPickUpTaskFromPurchaseFormFieldsFactory } from '@implementation/adapters/create-pick-up-task-from-purchase-form-fields';
+import { createPickUpTaskFromLittleErrandsFormFieldsFactory } from '@implementation/adapters/create-pick-up-task-from-little-errands-form-fields';
 import { setOrderWithSyncSetterFactory } from '@implementation/adapters/set-order-with-sync-setter';
-import type { PurchaseFormFieldValues } from '@presentation/components/organisms';
+import type { LittleErrandsFormFieldValues } from '@presentation/components/organisms';
 import {
-  PurchaseForm,
-  usePurchaseForm,
+  LittleErrandsForm,
+  useLittleErrandsForm,
 } from '@presentation/components/organisms';
 import { NarrowStack } from '@presentation/components/templates';
 import { withAuth } from '@presentation/hoc/with-auth';
@@ -22,7 +22,7 @@ import { useNavigate } from 'react-router-dom';
 type ProviderFactoryParams = {
   order: Order | undefined;
   save: (order: Order) => void;
-  getValues: UseFormGetValues<PurchaseFormFieldValues>;
+  getValues: UseFormGetValues<LittleErrandsFormFieldValues>;
 };
 
 function providerFactory({
@@ -38,16 +38,16 @@ function providerFactory({
     saveOrder: setOrderWithSyncSetterFactory({
       orderSetter: save,
     }),
-    getPickUpTask: createPickUpTaskFromPurchaseFormFieldsFactory({
+    getPickUpTask: createPickUpTaskFromLittleErrandsFormFieldsFactory({
       fields: formFields,
     }),
-    getDeliveryTask: createDeliveryTaskFromPurchaseFormFieldsFactory({
+    getDeliveryTask: createDeliveryTaskFromLittleErrandsFormFieldsFactory({
       fields: formFields,
     }),
   };
 }
 
-const useAttachPurchaseDeliveryTask = createInvokeBusinessHook(
+const useAttachLittleErrandsDeliveryTask = createInvokeBusinessHook(
   attachSimpleDeliveryTasksUC,
   providerFactory
 );
@@ -56,9 +56,9 @@ function Page(): JSX.Element {
   const navigate = useNavigate();
 
   const { order, save } = useCurrentOrder();
-  const { getValues, handleSubmit, control } = usePurchaseForm();
-  const { state, invoke: attachPurchaseDeliveryTask } =
-    useAttachPurchaseDeliveryTask({
+  const { getValues, handleSubmit, control } = useLittleErrandsForm();
+  const { state, invoke: attachLittleErrandsDeliveryTask } =
+    useAttachLittleErrandsDeliveryTask({
       order,
       save,
       getValues,
@@ -72,13 +72,13 @@ function Page(): JSX.Element {
   }, [navigate, state]);
 
   return (
-    <NarrowStack title="COMPRA">
-      <PurchaseForm
+    <NarrowStack title="MANDADITO">
+      <LittleErrandsForm
         control={control}
-        onSubmit={handleSubmit(() => attachPurchaseDeliveryTask())}
+        onSubmit={handleSubmit(() => attachLittleErrandsDeliveryTask())}
       />
     </NarrowStack>
   );
 }
 
-export const PurchasePage = withAuth(Page);
+export const LittleErrandsPage = withAuth(Page);
